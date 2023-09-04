@@ -1,289 +1,231 @@
-/**
-* Template Name: BizLand
-* Updated: Jul 27 2023 with Bootstrap v5.3.1
-* Template URL: https://bootstrapmade.com/bizland-bootstrap-business-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-(function() {
-  "use strict";
+"use strict";
+let isRtl = window.Helpers.isRtl(),
+    isDarkStyle = window.Helpers.isDarkStyle(),
+    menu, animate, isHorizontalLayout = !1;
+document.getElementById("layout-menu") && (isHorizontalLayout = document.getElementById("layout-menu").classList.contains("menu-horizontal")),
+    function() {
+        function e() {
+            var e = document.querySelector(".layout-page");
+            e && (0 < window.pageYOffset ? e.classList.add("window-scrolled") : e.classList.remove("window-scrolled"))
+        }
+        "undefined" != typeof Waves && (Waves.init(), Waves.attach(".btn[class*='btn-']:not(.position-relative):not([class*='btn-outline-']):not([class*='btn-label-'])", ["waves-light"]), Waves.attach("[class*='btn-outline-']:not(.position-relative)"), Waves.attach("[class*='btn-label-']:not(.position-relative)"), Waves.attach(".pagination .page-item .page-link"), Waves.attach(".dropdown-menu .dropdown-item"), Waves.attach(".light-style .list-group .list-group-item-action"), Waves.attach(".dark-style .list-group .list-group-item-action", ["waves-light"]), Waves.attach(".nav-tabs:not(.nav-tabs-widget) .nav-item .nav-link"), Waves.attach(".nav-pills .nav-item .nav-link", ["waves-light"]), Waves.attach(".menu-vertical .menu-item .menu-link.menu-toggle")), setTimeout(() => {
+            e()
+        }, 200), window.onscroll = function() {
+            e()
+        }, setTimeout(function() {
+            window.Helpers.initCustomOptionCheck()
+        }, 1e3), document.querySelectorAll("#layout-menu").forEach(function(e) {
+            menu = new Menu(e, {
+                orientation: isHorizontalLayout ? "horizontal" : "vertical",
+                closeChildren: !!isHorizontalLayout,
+                showDropdownOnHover: localStorage.getItem("templateCustomizer-" + templateName + "--ShowDropdownOnHover") ? "true" === localStorage.getItem("templateCustomizer-" + templateName + "--ShowDropdownOnHover") : void 0 === window.templateCustomizer || window.templateCustomizer.settings.defaultShowDropdownOnHover
+            }), window.Helpers.scrollToActive(animate = !1), window.Helpers.mainMenu = menu
+        }), document.querySelectorAll(".layout-menu-toggle").forEach(e => {
+            e.addEventListener("click", e => {
+                if (e.preventDefault(), window.Helpers.toggleCollapsed(), config.enableMenuLocalStorage && !window.Helpers.isSmallScreen()) try {
+                    localStorage.setItem("templateCustomizer-" + templateName + "--LayoutCollapsed", String(window.Helpers.isCollapsed()));
+                    var t, a = document.querySelector(".template-customizer-layouts-options");
+                    a && (t = window.Helpers.isCollapsed() ? "collapsed" : "expanded", a.querySelector(`input[value="${t}"]`).click())
+                } catch (e) {}
+            })
+        }), window.Helpers.swipeIn(".drag-target", function(e) {
+            window.Helpers.setCollapsed(!1)
+        }), window.Helpers.swipeOut("#layout-menu", function(e) {
+            window.Helpers.isSmallScreen() && window.Helpers.setCollapsed(!0)
+        });
+        let t = document.getElementsByClassName("menu-inner"),
+            a = document.getElementsByClassName("menu-inner-shadow")[0];
+        0 < t.length && a && t[0].addEventListener("ps-scroll-y", function() {
+            this.querySelector(".ps__thumb-y").offsetTop ? a.style.display = "block" : a.style.display = "none"
+        });
+        var n, o = document.querySelector(".dropdown-style-switcher"),
+            s = localStorage.getItem("templateCustomizer-" + templateName + "--Style") || window.templateCustomizer.settings.defaultStyle,
+            o = (window.templateCustomizer && o && ([].slice.call(o.children[1].querySelectorAll(".dropdown-item")).forEach(function(e) {
+                e.addEventListener("click", function() {
+                    var e = this.getAttribute("data-theme");
+                    "light" === e ? window.templateCustomizer.setStyle("light") : "dark" === e ? window.templateCustomizer.setStyle("dark") : window.templateCustomizer.setStyle("system")
+                })
+            }), o = o.querySelector("i"), "light" === s ? (o.classList.add("mdi-weather-sunny"), new bootstrap.Tooltip(o, {
+                title: "Light Mode",
+                fallbackPlacements: ["bottom"]
+            })) : "dark" === s ? (o.classList.add("mdi-weather-night"), new bootstrap.Tooltip(o, {
+                title: "Dark Mode",
+                fallbackPlacements: ["bottom"]
+            })) : (o.classList.add("mdi-monitor"), new bootstrap.Tooltip(o, {
+                title: "System Mode",
+                fallbackPlacements: ["bottom"]
+            }))), "system" === (n = s) && (n = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"), [].slice.call(document.querySelectorAll("[data-app-" + n + "-img]")).map(function(e) {
+                var t = e.getAttribute("data-app-" + n + "-img");
+                e.src = assetsPath + "img/" + t
+            }), "undefined" != typeof i18next && "undefined" != typeof i18NextHttpBackend && i18next.use(i18NextHttpBackend).init({
+                lng: "en",
+                debug: !1,
+                fallbackLng: "en",
+                backend: {
+                    loadPath: assetsPath + "json/locales/{{lng}}.json"
+                },
+                returnObjects: !0
+            }).then(function(e) {
+                i()
+            }), document.getElementsByClassName("dropdown-language"));
+        if (o.length) {
+            var l = o[0].querySelectorAll(".dropdown-item");
+            for (let e = 0; e < l.length; e++) l[e].addEventListener("click", function() {
+                var e, t = this.getAttribute("data-language");
+                for (e of this.parentNode.children)
+                    for (var a = e.parentElement.parentNode.firstChild; a;) 1 === a.nodeType && a !== a.parentElement && a.querySelector(".dropdown-item").classList.remove("active"), a = a.nextSibling;
+                this.classList.add("active"), i18next.changeLanguage(t, (e, t) => {
+                    if (e) return console.log("something went wrong loading", e);
+                    i()
+                })
+            })
+        }
 
-  /**
-   * Easy selector helper function
-   */
-  const select = (el, all = false) => {
-    el = el.trim()
-    if (all) {
-      return [...document.querySelectorAll(el)]
-    } else {
-      return document.querySelector(el)
-    }
-  }
+        function i() {
+            var e = document.querySelectorAll("[data-i18n]"),
+                t = document.querySelector('.dropdown-item[data-language="' + i18next.language + '"]');
+            t && t.click(), e.forEach(function(e) {
+                e.innerHTML = i18next.t(e.dataset.i18n)
+            })
+        }
+        s = document.querySelector(".dropdown-notifications-all");
 
-  /**
-   * Easy event listener function
-   */
-  const on = (type, el, listener, all = false) => {
-    let selectEl = select(el, all)
-    if (selectEl) {
-      if (all) {
-        selectEl.forEach(e => e.addEventListener(type, listener))
-      } else {
-        selectEl.addEventListener(type, listener)
-      }
-    }
-  }
-
-  /**
-   * Easy on scroll event listener 
-   */
-  const onscroll = (el, listener) => {
-    el.addEventListener('scroll', listener)
-  }
-
-  /**
-   * Navbar links active state on scroll
-   */
-  let navbarlinks = select('#navbar .scrollto', true)
-  const navbarlinksActive = () => {
-    let position = window.scrollY + 200
-    navbarlinks.forEach(navbarlink => {
-      if (!navbarlink.hash) return
-      let section = select(navbarlink.hash)
-      if (!section) return
-      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
-        navbarlink.classList.add('active')
-      } else {
-        navbarlink.classList.remove('active')
-      }
-    })
-  }
-  window.addEventListener('load', navbarlinksActive)
-  onscroll(document, navbarlinksActive)
-
-  /**
-   * Scrolls to an element with header offset
-   */
-  const scrollto = (el) => {
-    let header = select('#header')
-    let offset = header.offsetHeight
-
-    if (!header.classList.contains('header-scrolled')) {
-      offset -= 16
-    }
-
-    let elementPos = select(el).offsetTop
-    window.scrollTo({
-      top: elementPos - offset,
-      behavior: 'smooth'
-    })
-  }
-
-  /**
-   * Header fixed top on scroll
-   */
-  let selectHeader = select('#header')
-  if (selectHeader) {
-    let headerOffset = selectHeader.offsetTop
-    let nextElement = selectHeader.nextElementSibling
-    const headerFixed = () => {
-      if ((headerOffset - window.scrollY) <= 0) {
-        selectHeader.classList.add('fixed-top')
-        nextElement.classList.add('scrolled-offset')
-      } else {
-        selectHeader.classList.remove('fixed-top')
-        nextElement.classList.remove('scrolled-offset')
-      }
-    }
-    window.addEventListener('load', headerFixed)
-    onscroll(document, headerFixed)
-  }
-
-  /**
-   * Back to top button
-   */
-  let backtotop = select('.back-to-top')
-  if (backtotop) {
-    const toggleBacktotop = () => {
-      if (window.scrollY > 100) {
-        backtotop.classList.add('active')
-      } else {
-        backtotop.classList.remove('active')
-      }
-    }
-    window.addEventListener('load', toggleBacktotop)
-    onscroll(document, toggleBacktotop)
-  }
-
-  /**
-   * Mobile nav toggle
-   */
-  on('click', '.mobile-nav-toggle', function(e) {
-    select('#navbar').classList.toggle('navbar-mobile')
-    this.classList.toggle('bi-list')
-    this.classList.toggle('bi-x')
-  })
-
-  /**
-   * Mobile nav dropdowns activate
-   */
-  on('click', '.navbar .dropdown > a', function(e) {
-    if (select('#navbar').classList.contains('navbar-mobile')) {
-      e.preventDefault()
-      this.nextElementSibling.classList.toggle('dropdown-active')
-    }
-  }, true)
-
-  /**
-   * Scrool with ofset on links with a class name .scrollto
-   */
-  on('click', '.scrollto', function(e) {
-    if (select(this.hash)) {
-      e.preventDefault()
-
-      let navbar = select('#navbar')
-      if (navbar.classList.contains('navbar-mobile')) {
-        navbar.classList.remove('navbar-mobile')
-        let navbarToggle = select('.mobile-nav-toggle')
-        navbarToggle.classList.toggle('bi-list')
-        navbarToggle.classList.toggle('bi-x')
-      }
-      scrollto(this.hash)
-    }
-  }, true)
-
-  /**
-   * Scroll with ofset on page load with hash links in the url
-   */
-  window.addEventListener('load', () => {
-    if (window.location.hash) {
-      if (select(window.location.hash)) {
-        scrollto(window.location.hash)
-      }
-    }
-  });
-
-  /**
-   * Preloader
-   */
-  let preloader = select('#preloader');
-  if (preloader) {
-    window.addEventListener('load', () => {
-      preloader.remove()
+        function r(e) {
+            "show.bs.collapse" == e.type || "show.bs.collapse" == e.type ? e.target.closest(".accordion-item").classList.add("active") : e.target.closest(".accordion-item").classList.remove("active")
+        }
+        const c = document.querySelectorAll(".dropdown-notifications-read");
+        s && s.addEventListener("click", e => {
+            c.forEach(e => {
+                e.closest(".dropdown-notifications-item").classList.add("marked-as-read")
+            })
+        }), c && c.forEach(t => {
+            t.addEventListener("click", e => {
+                t.closest(".dropdown-notifications-item").classList.toggle("marked-as-read")
+            })
+        }), document.querySelectorAll(".dropdown-notifications-archive").forEach(t => {
+            t.addEventListener("click", e => {
+                t.closest(".dropdown-notifications-item").remove()
+            })
+        }), [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]')).map(function(e) {
+            return new bootstrap.Tooltip(e)
+        });
+        [].slice.call(document.querySelectorAll(".accordion")).map(function(e) {
+            e.addEventListener("show.bs.collapse", r), e.addEventListener("hide.bs.collapse", r)
+        });
+        if (window.Helpers.setAutoUpdate(!0), window.Helpers.initPasswordToggle(), window.Helpers.initSpeechToText(), window.Helpers.navTabsAnimation(), window.Helpers.initNavbarDropdownScrollbar(), window.addEventListener("resize", function(e) {
+                window.innerWidth >= window.Helpers.LAYOUT_BREAKPOINT && document.querySelector(".search-input-wrapper") && (document.querySelector(".search-input-wrapper").classList.add("d-none"), document.querySelector(".search-input").value = ""), document.querySelector("[data-template^='horizontal-menu']") && setTimeout(function() {
+                    window.innerWidth < window.Helpers.LAYOUT_BREAKPOINT ? document.getElementById("layout-menu") && document.getElementById("layout-menu").classList.contains("menu-horizontal") && menu.switchMenu("vertical") : document.getElementById("layout-menu") && document.getElementById("layout-menu").classList.contains("menu-vertical") && menu.switchMenu("horizontal")
+                }, 100), window.Helpers.navTabsAnimation()
+            }, !0), !isHorizontalLayout && !window.Helpers.isSmallScreen() && ("undefined" != typeof TemplateCustomizer && window.templateCustomizer.settings.defaultMenuCollapsed && window.Helpers.setCollapsed(!0, !1), "undefined" != typeof config && config.enableMenuLocalStorage)) try {
+            null !== localStorage.getItem("templateCustomizer-" + templateName + "--LayoutCollapsed") && "false" !== localStorage.getItem("templateCustomizer-" + templateName + "--LayoutCollapsed") && window.Helpers.setCollapsed("true" === localStorage.getItem("templateCustomizer-" + templateName + "--LayoutCollapsed"), !1)
+        } catch (e) {}
+    }(), "undefined" != typeof $ && $(function() {
+        window.Helpers.initSidebarToggle();
+        var t, a, e, n = $(".search-toggler"),
+            o = $(".search-input-wrapper"),
+            s = $(".search-input"),
+            l = $(".content-backdrop");
+        n.length && n.on("click", function() {
+            o.length && (o.toggleClass("d-none"), s.focus())
+        }), $(document).on("keydown", function(e) {
+            var t = e.ctrlKey,
+                e = 191 === e.which;
+            t && e && o.length && (o.toggleClass("d-none"), s.focus())
+        }), setTimeout(function() {
+            var e = $(".twitter-typeahead");
+            s.on("focus", function() {
+                o.hasClass("container-xxl") ? (o.find(e).addClass("container-xxl"), e.removeClass("container-fluid")) : o.hasClass("container-fluid") && (o.find(e).addClass("container-fluid"), e.removeClass("container-xxl"))
+            })
+        }, 10), s.length && (t = function(n) {
+            return function(t, e) {
+                let a;
+                a = [], n.filter(function(e) {
+                    if (e.name.toLowerCase().startsWith(t.toLowerCase())) a.push(e);
+                    else {
+                        if (e.name.toLowerCase().startsWith(t.toLowerCase()) || !e.name.toLowerCase().includes(t.toLowerCase())) return [];
+                        a.push(e), a.sort(function(e, t) {
+                            return t.name < e.name ? 1 : -1
+                        })
+                    }
+                }), e(a)
+            }
+        }, n = "search-vertical.json", $("#layout-menu").hasClass("menu-horizontal") && (n = "search-horizontal.json"), a = $.ajax({
+            url: assetsPath + "json/" + n,
+            dataType: "json",
+            async: !1
+        }).responseJSON, s.each(function() {
+            var e = $(this);
+            s.typeahead({
+                hint: !1,
+                classNames: {
+                    menu: "tt-menu navbar-search-suggestion",
+                    cursor: "active",
+                    suggestion: "suggestion d-flex justify-content-between px-3 py-2 w-100"
+                }
+            }, {
+                name: "pages",
+                display: "name",
+                limit: 5,
+                source: t(a.pages),
+                templates: {
+                    header: '<h6 class="suggestions-header text-primary mb-0 mx-3 mt-3 pb-2">Pages</h6>',
+                    suggestion: function({
+                        url: e,
+                        icon: t,
+                        name: a
+                    }) {
+                        return '<a href="' + e + '"><div><i class="mdi ' + t + ' me-2"></i><span class="align-middle">' + a + "</span></div></a>"
+                    },
+                    notFound: '<div class="not-found px-3 py-2"><h6 class="suggestions-header text-primary mb-2">Pages</h6><p class="py-2 mb-0"><i class="mdi mdi-alert-circle-outline me-2 mdi-14px"></i> No Results Found</p></div>'
+                }
+            }, {
+                name: "files",
+                display: "name",
+                limit: 4,
+                source: t(a.files),
+                templates: {
+                    header: '<h6 class="suggestions-header text-primary mb-0 mx-3 mt-3 pb-2">Files</h6>',
+                    suggestion: function({
+                        src: e,
+                        name: t,
+                        subtitle: a,
+                        meta: n
+                    }) {
+                        return '<a href="javascript:;"><div class="d-flex w-50"><img class="me-3" src="' + assetsPath + e + '" alt="' + t + '" height="32"><div class="w-75"><h6 class="mb-0">' + t + '</h6><small class="text-muted">' + a + '</small></div></div><small class="text-muted">' + n + "</small></a>"
+                    },
+                    notFound: '<div class="not-found px-3 py-2"><h6 class="suggestions-header text-primary mb-2">Files</h6><p class="py-2 mb-0"><i class="mdi mdi-alert-circle-outline me-2 mdi-14px"></i> No Results Found</p></div>'
+                }
+            }, {
+                name: "members",
+                display: "name",
+                limit: 4,
+                source: t(a.members),
+                templates: {
+                    header: '<h6 class="suggestions-header text-primary mb-0 mx-3 mt-3 pb-2">Members</h6>',
+                    suggestion: function({
+                        name: e,
+                        src: t,
+                        subtitle: a
+                    }) {
+                        return '<a href="app-user-view-account.html"><div class="d-flex align-items-center"><img class="rounded-circle me-3" src="' + assetsPath + t + '" alt="' + e + '" height="32"><div class="user-info"><h6 class="mb-0">' + e + '</h6><small class="text-muted">' + a + "</small></div></div></a>"
+                    },
+                    notFound: '<div class="not-found px-3 py-2"><h6 class="suggestions-header text-primary mb-2">Members</h6><p class="py-2 mb-0"><i class="mdi mdi-alert-circle-outline me-2 mdi-14px"></i> No Results Found</p></div>'
+                }
+            }).bind("typeahead:render", function() {
+                l.addClass("show").removeClass("fade")
+            }).bind("typeahead:select", function(e, t) {
+                t.url && (window.location = t.url)
+            }).bind("typeahead:close", function() {
+                s.val(""), e.typeahead("val", ""), o.addClass("d-none"), l.addClass("fade").removeClass("show")
+            }), s.on("keyup", function() {
+                "" == s.val() && l.addClass("fade").removeClass("show")
+            })
+        }), $(".navbar-search-suggestion").each(function() {
+            e = new PerfectScrollbar($(this)[0], {
+                wheelPropagation: !1,
+                suppressScrollX: !0
+            })
+        }), s.on("keyup", function() {
+            e.update()
+        }))
     });
-  }
-
-  /**
-   * Initiate glightbox
-   */
-  const glightbox = GLightbox({
-    selector: '.glightbox'
-  });
-
-  /**
-   * Skills animation
-   */
-  let skilsContent = select('.skills-content');
-  if (skilsContent) {
-    new Waypoint({
-      element: skilsContent,
-      offset: '80%',
-      handler: function(direction) {
-        let progress = select('.progress .progress-bar', true);
-        progress.forEach((el) => {
-          el.style.width = el.getAttribute('aria-valuenow') + '%'
-        });
-      }
-    })
-  }
-
-  /**
-   * Testimonials slider
-   */
-  new Swiper('.testimonials-slider', {
-    speed: 600,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    slidesPerView: 'auto',
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    }
-  });
-
-  /**
-   * Porfolio isotope and filter
-   */
-  window.addEventListener('load', () => {
-    let portfolioContainer = select('.portfolio-container');
-    if (portfolioContainer) {
-      let portfolioIsotope = new Isotope(portfolioContainer, {
-        itemSelector: '.portfolio-item'
-      });
-
-      let portfolioFilters = select('#portfolio-flters li', true);
-
-      on('click', '#portfolio-flters li', function(e) {
-        e.preventDefault();
-        portfolioFilters.forEach(function(el) {
-          el.classList.remove('filter-active');
-        });
-        this.classList.add('filter-active');
-
-        portfolioIsotope.arrange({
-          filter: this.getAttribute('data-filter')
-        });
-        portfolioIsotope.on('arrangeComplete', function() {
-          AOS.refresh()
-        });
-      }, true);
-    }
-
-  });
-
-  /**
-   * Initiate portfolio lightbox 
-   */
-  const portfolioLightbox = GLightbox({
-    selector: '.portfolio-lightbox'
-  });
-
-  /**
-   * Portfolio details slider
-   */
-  new Swiper('.portfolio-details-slider', {
-    speed: 400,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    }
-  });
-
-  /**
-   * Animation on scroll
-   */
-  window.addEventListener('load', () => {
-    AOS.init({
-      duration: 1000,
-      easing: 'ease-in-out',
-      once: true,
-      mirror: false
-    })
-  });
-
-  /**
-   * Initiate Pure Counter 
-   */
-  new PureCounter();
-
-})()
