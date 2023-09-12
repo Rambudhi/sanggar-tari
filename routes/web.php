@@ -22,9 +22,14 @@ use App\Http\Controllers\Web\Admin\UserController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/login', [LoginController::class, 'formLogin'])->name('form-login');
 Route::post('/do-login', [LoginController::class, 'doLogin'])->name('do-login');
-Route::get('/register', [RegisterController::class, 'formRegister'])->name('form-register');
-Route::post('/do-register', [RegisterController::class, 'doRegister'])->name('do-register');
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+
+Route::get('/register', [RegisterController::class, 'formRegister'])->name('form-register');
+Route::get('/register-course', [RegisterController::class, 'formRegisterCourse'])->name('form-register-course');
+Route::post('/do-register', [RegisterController::class, 'doRegister'])->name('do-register');
+Route::post('/do-insert-register-course', [RegisterController::class, 'doInsertRegisterCourse'])->name('do-insert-register-course');
+Route::post('/upload-kk', [RegisterController::class, 'uploadKK'])->name('upload-kk');
+Route::post('/upload-bp', [RegisterController::class, 'uploadBuktiPembayaran'])->name('upload-bp');
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin::dashboard');

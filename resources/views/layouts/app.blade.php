@@ -23,6 +23,7 @@
   <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}" />
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
@@ -36,6 +37,7 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  @yield('styles')
 </head>
 
 <body>
@@ -69,19 +71,20 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/main2.js') }}"></script>
-
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.12/dist/js/splide.min.js"></script>
+    <script src="{{ asset('assets/vendor/libs/toastr/toastr.js') }}"></script>
+    <script src="{{ asset('assets/js/ui-toasts.js') }}"></script>
     <script>
-        var splide = new Splide('.splide', {
-            arrows :false,
-            type: 'loop',
-            perPage: 5,
-            rewind: true,
-            autoplay: "play"
+        $(document).ready(function() {
+            toastr.options.timeOut = 8000;
+            @if (Session::has('error'))
+                toastr.error('{{ Session::get('error') }}');
+            @elseif(Session::has('success'))
+                toastr.success('{{ Session::get('success') }}');
+            @endif
         });
-
-        splide.mount();
     </script>
-
+    @yield('scripts')
 </body>
 </html>
