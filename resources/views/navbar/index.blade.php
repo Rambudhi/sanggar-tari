@@ -3,7 +3,7 @@
         <li><a class="nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}" href="{{ route('home') }}">Home</a></li>
         <li><a class="nav-link" href="#about">Penyewaan Kostum</a></li>
         <li><a class="nav-link" href="#services">Pengembalian Kostum</a></li>
-        <li  style="display: {{ $display }};"><a class="nav-link {{ Route::currentRouteName() == 'form-register-course' ? 'active' : '' }}" href="{{ route('form-register-course') }}">Daftar Kursus</a></li>
+        <li  style="display: {{ $display_kursus }};"><a class="nav-link {{ Route::currentRouteName() == 'form-register-course' ? 'active' : '' }}" href="{{ route('form-register-course') }}">Daftar Kursus</a></li>
         <li><a class="nav-link" href="#profile">Profil Sanggar</a></li>
         @if (session('email'))
             <li class="dropdown">

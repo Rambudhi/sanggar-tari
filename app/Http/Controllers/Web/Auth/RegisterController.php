@@ -48,13 +48,13 @@ class RegisterController extends Controller
         if (Session::get('user_type') === null) {
             return view('login.index');
         } else {
-
+            $display_kursus = 'block';
             $rc = DB::table('register_course')->where('id_user', Session::get('id'))->exists();
 
             if(!$rc){
-                return view('register_course.index');
+                return view('register_course.index', compact('display_kursus'));
             } else {
-                return view('register_course.waiting_verification');
+                return view('register_course.waiting_verification', compact('display_kursus'));
             }
         }
     }
