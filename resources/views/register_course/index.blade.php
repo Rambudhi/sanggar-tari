@@ -104,7 +104,7 @@
                         <div class="col-md-6">
                             <label for="kategoriKursus" class="form-label">Kartu Keluarga</label>
                                 <div class="mb-4 d-flex justify-content-center">
-                                    <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="example placeholder" id="image-kk" style="width: 300px;" />
+                                    <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="example placeholder" id="image-kk" style="width: 300px; height: 300px;" />
                                 </div>
                             <div class="d-flex justify-content-center">
                                 <div class="btn btn-primary btn-rounded">
@@ -116,7 +116,7 @@
                         <div class="col-md-6">
                             <label for="kategoriKursus" class="form-label">Bukti Pembayaran</label>
                             <div class="mb-4 d-flex justify-content-center">
-                                <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="example placeholder" id="image-bp" style="width: 300px;" />
+                                <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="example placeholder" id="image-bp" style="width: 300px; height: 300px;" />
                             </div>
                             <div class="d-flex justify-content-center">
                                 <div class="btn btn-primary btn-rounded">
@@ -219,6 +219,8 @@
                     toastr.options.timeOut = 8000;
                     toastr.success(response.message);
                     document.getElementById("form-regis-course").reset();
+                    $('#image-kk').attr('src','https://mdbootstrap.com/img/Photos/Others/placeholder.jpg');
+                    $('#image-bp').attr('src','https://mdbootstrap.com/img/Photos/Others/placeholder.jpg');
                 } else {
                     toastr.options.timeOut = 8000;
                     toastr.error(response.message); 

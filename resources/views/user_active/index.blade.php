@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-Dahsboard
+Pengguna Aktif
 @endsection
 
 @section('content')

@@ -33,6 +33,12 @@
                 <div data-i18n="penggunaAktif">Pengguna Aktif</div>
             </a>
         </li>
+        <li class="menu-item {{ Route::currentRouteName() == 'admin::register-course' ? 'active' : '' }}">
+            <a href="{{ route('admin::register-course') }}" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-account-outline"></i>
+                <div data-i18n="penggunaAktif">Pendaftaran Kursus</div>
+            </a>
+        </li>
     </ul>
 
 </aside>

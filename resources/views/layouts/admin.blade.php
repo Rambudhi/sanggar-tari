@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>@yield('title') - UI Finance </title>
+    <title>@yield('title') - Sanggar Tari </title>
 
     
     <meta name="description" content="Start your development with a Dashboard for Bootstrap 5" />
@@ -56,6 +56,15 @@
     <!-- Helpers -->
     <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
     <script src="{{ asset('assets/js/config.js') }}"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <style>
+        @media only screen and (max-width: 1200px){
+            .layout-navbar .navbar-nav-right {
+                flex-basis: 0% !important;
+            }
+        }
+    </style>
+    @yield('styles')
 </head>
 
 <body>

@@ -34,4 +34,6 @@ Route::post('/upload-bp', [RegisterController::class, 'uploadBuktiPembayaran'])-
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin::dashboard');
     Route::get('/user-active', [UserController::class, 'userActive'])->name('admin::user-active');
+    Route::get('/register-course', [UserController::class, 'registerCourse'])->name('admin::register-course');
+    Route::post('/verified-course', [UserController::class, 'verifiedCourse'])->name('admin::verified-course');
 });
