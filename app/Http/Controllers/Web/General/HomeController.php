@@ -32,7 +32,7 @@ class HomeController extends Controller
         $kategori = '';
          if(Session::get('id')) {
             $rc = DB::table('register_course')->where('id_user', Session::get('id'))->first();
-            if($rc->is_verified == 1) {
+            if(isset($rc->is_verified) == 1) {
                 $display = 'none';
                 $display_kursus = 'block';
                 $kategori = $rc->kategori_kursus;
