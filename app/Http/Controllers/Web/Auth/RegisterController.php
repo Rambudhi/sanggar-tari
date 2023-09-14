@@ -173,6 +173,8 @@ class RegisterController extends Controller
                 'pendidikan' => isset($data['pendidikan']) ? $data['pendidikan'] : null,
                 'nama_belakang' => $data['nama_belakang'],
                 'nomor_telepon' => isset($data['nomor_telepon']) ? $data['nomor_telepon'] : null,
+                'nama_ortu' => isset($data['nama_ortu']) ? $data['nama_ortu'] : null,
+                'nomor_telepon_ortu' => isset($data['nomor_telepon_ortu']) ? $data['nomor_telepon_ortu'] : null,
                 'kartu_keluarga' => isset($data['kartu_keluarga']) ? $data['kartu_keluarga'] : null,
                 'bukti_pembayaran' => isset($data['bukti_pembayaran']) ? $data['bukti_pembayaran'] : null,
                 'kategori_kursus' => isset($data['kategori_kursus']) ? $data['kategori_kursus'] : null,
