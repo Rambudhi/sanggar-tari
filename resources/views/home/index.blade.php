@@ -34,7 +34,7 @@
 
     <main id="main">
         <!-- ======= Featured Services Section ======= -->
-        <section id="featured-services" class="featured-services">
+        <section id="featured-services" class="featured-services" style="display: {{ $display }}">
             <div class="container" data-aos="fade-up">
                 <div class="row mx-auto">
                     <!-- Button trigger modal -->
@@ -63,7 +63,7 @@
         </section><!-- End Featured Services Section -->
 
         <!-- ======= Team Section ======= -->
-        <section id="team" class="team">
+        <section id="team" class="team" style="display: {{ $display }}">
             <div class="container" data-aos="fade-up">
         
                 <div class="section-title">
@@ -119,6 +119,26 @@
             </div>
         </section>
         <!-- End Team Section -->
+
+        <!-- ======= Services Section ======= -->
+        <section id="kursus" class="services" style="display: {{ $display_kursus }}">
+            <div class="container" data-aos="fade-up">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="align-items-md-center">
+                            <h1 style="text-align: center;">Kelas tari {{ $kategori }}</h1>
+                            <img class="ms-auto" src="{{ asset('assets/img/image-tari.svg') }}" height="400" width="700">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="text-center" style="padding-top: 200px; margin-left: 200px;">
+                            <button class="btn btn-primary" style="width: 100%;">Belajar Kursus</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- End Services Section -->
 
         <!-- ======= About Section ======= -->
         <section id="about" class="about section-bg">

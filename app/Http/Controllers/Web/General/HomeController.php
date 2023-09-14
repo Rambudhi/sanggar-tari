@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Web\General;
 
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
+use DB;
 
 class HomeController extends Controller
 {
@@ -25,6 +27,18 @@ class HomeController extends Controller
 
     public function index()
     {
-         return view('home.index');
+        $display = 'block';
+        $display_kursus = 'none';
+        $kategori = '';
+         if(Session::get('id')) {
+            $rc = DB::table('register_course')->where('id_user', Session::get('id'))->first();
+            if($rc->is_verified == 1) {
+                $display = 'none';
+                $display_kursus = 'block';
+                $kategori = $rc->kategori_kursus;
+            }
+         }
+         
+         return view('home.index', compact('display', 'display_kursus', 'kategori'));
     }
 }
