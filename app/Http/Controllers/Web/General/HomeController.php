@@ -36,6 +36,8 @@ class HomeController extends Controller
                 $display = 'none';
                 $display_kursus = 'block';
                 $kategori = $rc->kategori_kursus;
+            } else {
+                $display_kursus = 'block'; 
             }
          }
          
