@@ -67,6 +67,12 @@ class LoginController extends Controller
                     Session::put('email', $user->email);
                     Session::put('id', $user->id);
                     Session::put('user_type', $user->user_type);
+
+                    $rc = DB::table('register_course')->where('id_user', $user->id)->first();
+
+                    if($rc !== null) {
+                        Session::put('photo', $rc->photo);
+                    }
                     
                     return redirect()->route('home')->with('success', 'Anda Berhasil Login');
                 }

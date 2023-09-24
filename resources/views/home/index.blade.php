@@ -121,19 +121,22 @@
         <!-- End Team Section -->
 
         <!-- ======= Services Section ======= -->
-        <section id="kursus" class="services" style="display: {{ $display_kursus }}">
+        <section id="kursus" class="services" style="display: {{ $display_kelas }}">
             <div class="container" data-aos="fade-up">
+                <div class="section-title">
+                    <h2>Kursus Saya</h2>
+                    <p></p>
+                </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                         <div class="align-items-md-center">
-                            <h1 style="text-align: center;">Kelas tari {{ $kategori }}</h1>
                             <img class="ms-auto" src="{{ asset('assets/img/image-tari.svg') }}" height="400" width="700">
                         </div>
                     </div>
 
                     <div class="col-lg-6 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
                         <div class="text-center" style="padding-top: 200px; margin-left: 200px;">
-                            <button class="btn btn-primary" style="width: 100%;">Belajar Kursus</button>
+                            <button class="btn btn-primary" style="width: 100%;" onclick="location.href = '{{ route('class', ['kategori' => $kategori]) }}'">Belajar Kursus</button>
                         </div>
                     </div>
                 </div>
@@ -253,7 +256,7 @@
 
                 <div class="section-title">
                     <h2>Profile</h2>
-                    <h3>Sanngar Tari<span> Purnama</span></h3>
+                    <h3>Sanggar Tari<span> Purnama</span></h3>
                     <p></p>
                 </div>
 

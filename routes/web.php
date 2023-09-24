@@ -6,8 +6,11 @@ use App\Http\Controllers\Web\Auth\LoginController;
 use App\Http\Controllers\Web\Auth\LogoutController;
 use App\Http\Controllers\Web\Auth\RegisterController;
 use App\Http\Controllers\Web\General\HomeController;
+use App\Http\Controllers\Web\General\ClassController;
 use App\Http\Controllers\Web\Admin\DashboardController;
 use App\Http\Controllers\Web\Admin\UserController;
+use App\Http\Controllers\Web\Admin\ClassController as Admin_ClassController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,12 +31,31 @@ Route::get('/register', [RegisterController::class, 'formRegister'])->name('form
 Route::get('/register-course', [RegisterController::class, 'formRegisterCourse'])->name('form-register-course');
 Route::post('/do-register', [RegisterController::class, 'doRegister'])->name('do-register');
 Route::post('/do-insert-register-course', [RegisterController::class, 'doInsertRegisterCourse'])->name('do-insert-register-course');
+Route::post('/do-next-register-course', [RegisterController::class, 'doNextRegisterCourse'])->name('do-next-register-course');
+Route::post('/upload-photo', [RegisterController::class, 'uploadPhoto'])->name('upload-photo');
 Route::post('/upload-kk', [RegisterController::class, 'uploadKK'])->name('upload-kk');
 Route::post('/upload-bp', [RegisterController::class, 'uploadBuktiPembayaran'])->name('upload-bp');
+
+Route::get('/kelas/{kategori}', [ClassController::class, 'index'])->name('class');
+Route::get('/kelas/{kategori}/{id}', [ClassController::class, 'indexDetail'])->name('class-video');
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin::dashboard');
     Route::get('/user-active', [UserController::class, 'userActive'])->name('admin::user-active');
-    Route::get('/register-course', [UserController::class, 'registerCourse'])->name('admin::register-course');
     Route::post('/verified-course', [UserController::class, 'verifiedCourse'])->name('admin::verified-course');
+
+    Route::get('/register-course', [UserController::class, 'registerCourse'])->name('admin::register-course');
+    Route::post('/edit-register-course', [UserController::class, 'editRegisterCourse'])->name('admin::edit-register-course');
+    Route::get('/register-course-detail/{id}', [UserController::class, 'registerCourseDetail'])->name('admin::register-course-detail');
+
+    Route::get('/class-material', [Admin_ClassController::class, 'index'])->name('admin::class-material');
+    Route::get('/class-material-detail/{id}', [Admin_ClassController::class, 'indexDetail'])->name('admin::class-material-detail');
+
+    Route::get('/delete-class-material-detail/{id}/{id_materi}', [Admin_ClassController::class, 'deleteMateriVideo'])->name('admin::delete-class-material-detail');
+    
+    Route::post('/add-materi-kursus', [Admin_ClassController::class, 'addMateriKursus'])->name('admin::add-materi-kursus');
+    Route::post('/edit-materi-kursus', [Admin_ClassController::class, 'editMateriKursus'])->name('admin::edit-materi-kursus');
+    Route::get('/delete-class-material/{id}', [Admin_ClassController::class, 'deleteMateriKursus'])->name('admin::delete-class-material');
+
+    Route::post('/add-materi-video', [Admin_ClassController::class, 'addMateriVideo'])->name('admin::add-materi-video');
 });

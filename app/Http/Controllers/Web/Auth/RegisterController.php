@@ -48,14 +48,56 @@ class RegisterController extends Controller
         if (Session::get('user_type') === null) {
             return view('login.index');
         } else {
-            $display_kursus = 'block';
-            $rc = DB::table('register_course')->where('id_user', Session::get('id'))->exists();
+            $display = 'block';
+            $display_kelas = 'none';
+            $display_daftar_kursus  = 'block';
+            $kategori = 'none';
+            $rc = DB::table('register_course')
+                ->join('register_course_detail', 'register_course_detail.id_register_course', 'register_course.id')
+                ->where('id_user', Session::get('id'))
+                ->exists();
 
             if(!$rc){
-                return view('register_course.index', compact('display_kursus'));
+                return view('register_course.index', compact('display', 'display_kelas', 'display_daftar_kursus', 'kategori'));
             } else {
-                return view('register_course.waiting_verification', compact('display_kursus'));
+                return view('register_course.waiting_verification', compact('display', 'display_kelas', 'display_daftar_kursus', 'kategori'));
             }
+        }
+    }
+
+    public function uploadPhoto(Request $request) {
+        try {
+            $data = $request->all();
+
+            $rules = [
+                'photo_file' => 'required|mimes:jpeg,png',
+            ];
+    
+            $validator = Validator::make($data, $rules);
+            if ($validator->fails()) {
+                $errors = '';
+                foreach($validator->messages()->messages() as $error) {
+                    $errors .= str_replace('.', '', $error[0] . ', ');
+                }
+    
+                return response()->json(['code' => false, 'message' => $errors]);
+            }
+         
+            //Move Uploaded File to public folder
+            $destinationPath = 'PHOTO';
+            $myimage = $data['photo_file']->getClientOriginalName();
+            $data['photo_file']->move(public_path($destinationPath), $myimage);
+
+            $url = env('APP_URL') .'/'. $destinationPath . '/' . $myimage;
+
+            $data = [
+                'url' => $url,
+                'image_name' => $myimage
+            ];
+
+            return response()->json(['code' => true, 'message' => 'Sukes Upload Photo', 'data' => $data]);
+        } catch (Exception $e) {
+            return response()->json(['code' => false, 'message' => $e->getMessage()]);
         }
     }
 
@@ -148,6 +190,7 @@ class RegisterController extends Controller
                 'pendidikan' => 'required',
                 'nama_belakang' => 'required',
                 'nomor_telepon' => 'required',
+                'photo' => 'required',
                 'kartu_keluarga' => 'required',
                 'bukti_pembayaran' => 'required',
                 'kategori_kursus' => 'required',
@@ -173,18 +216,66 @@ class RegisterController extends Controller
                 'pendidikan' => isset($data['pendidikan']) ? $data['pendidikan'] : null,
                 'nama_belakang' => $data['nama_belakang'],
                 'nomor_telepon' => isset($data['nomor_telepon']) ? $data['nomor_telepon'] : null,
+                'photo' => isset($data['photo']) ? $data['photo'] : null,
                 'nama_ortu' => isset($data['nama_ortu']) ? $data['nama_ortu'] : null,
                 'nomor_telepon_ortu' => isset($data['nomor_telepon_ortu']) ? $data['nomor_telepon_ortu'] : null,
-                'kartu_keluarga' => isset($data['kartu_keluarga']) ? $data['kartu_keluarga'] : null,
-                'bukti_pembayaran' => isset($data['bukti_pembayaran']) ? $data['bukti_pembayaran'] : null,
-                'kategori_kursus' => isset($data['kategori_kursus']) ? $data['kategori_kursus'] : null,
+                'pekerjaan_ortu' => isset($data['pekerjaan_ortu']) ? $data['pekerjaan_ortu'] : null,
                 'alamat' => isset($data['alamat']) ? $data['alamat'] : null,
                 'kota' => isset($data['kota']) ? $data['kota'] : null,
                 'provinsi' => isset($data['provinsi']) ? $data['provinsi'] : null,
                 'kode_pos' => isset($data['kode_pos']) ? $data['kode_pos'] : null,
+                'kartu_keluarga' => isset($data['kartu_keluarga']) ? $data['kartu_keluarga'] : null,
             ];
+
+            Session::put('photo', $data['photo']);
          
-            DB::table('register_course')->insert($insert);
+            $id_register_course = DB::table('register_course')->insertGetId($insert);
+
+            $details = [
+                'id_register_course' => $id_register_course,
+                'bukti_pembayaran' => isset($data['bukti_pembayaran']) ? $data['bukti_pembayaran'] : null,
+                'kategori_kursus' => isset($data['kategori_kursus']) ? $data['kategori_kursus'] : null,
+            ];
+
+            DB::table('register_course_detail')->insert($details);
+
+            return response()->json(['code' => true, 'message' => 'Sukes Daftar Kursus', 'data' => $data]);
+        } catch (Exception $e) {
+            return response()->json(['code' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function doNextRegisterCourse(Request $request) {
+        try {
+            $data = $request->all();
+
+            if($data['bukti_pembayaran'] === 'https://mdbootstrap.com/img/Photos/Others/placeholder.jpg') {
+                $data['bukti_pembayaran'] = '';
+            }
+
+            $rules = [
+                'bukti_pembayaran' => 'required',
+            ];
+    
+            $validator = Validator::make($data, $rules);
+            if ($validator->fails()) {
+                $errors = '';
+                foreach($validator->messages()->messages() as $error) {
+                    $errors .= str_replace('.', '', $error[0] . ', ');
+                }
+    
+                return response()->json(['code' => false, 'message' => $errors]);
+            }
+
+            $id_register_course = DB::table('register_course')->where('id_user', $data['id_user'])->pluck('id')->first();
+         
+            $details = [
+                'id_register_course' => $id_register_course,
+                'bukti_pembayaran' => isset($data['bukti_pembayaran']) ? $data['bukti_pembayaran'] : null,
+                'kategori_kursus' => isset($data['kategori_kursus']) ? $data['kategori_kursus'] : null,
+            ];
+
+            DB::table('register_course_detail')->insert($details);
 
             return response()->json(['code' => true, 'message' => 'Sukes Daftar Kursus', 'data' => $data]);
         } catch (Exception $e) {

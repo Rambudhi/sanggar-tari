@@ -102,6 +102,18 @@
                             </div>
                         </div>
                         <div class="col-md-6">
+                            <label for="kategoriKursus" class="form-label">Photo</label>
+                                <div class="mb-4 d-flex justify-content-center">
+                                    <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="example placeholder" id="image-photo" style="width: 300px; height: 300px;" />
+                                </div>
+                            <div class="d-flex justify-content-center">
+                                <div class="btn btn-primary btn-rounded">
+                                    <label class="form-label text-white m-1" for="photo-file">Choose file</label>
+                                    <input type="file" class="form-control d-none" id="photo-file" name="photo_file" onchange="uploadPhoto()"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
                             <label for="kategoriKursus" class="form-label">Kartu Keluarga</label>
                                 <div class="mb-4 d-flex justify-content-center">
                                     <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="example placeholder" id="image-kk" style="width: 300px; height: 300px;" />
@@ -126,7 +138,12 @@
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <div class="text-right">
+                            <div class="text-right p-5">
+                                <div class="pe-5">
+                                    <h5>*Note :</h5>
+                                    <span>Biaya : Rp. 100.000, </span>
+                                    <span>Transfer Ke Rekening : BCA an Romi 134532394 </span>
+                                </div>
                                <button class="btn btn-primary float-end" id="save">Simpan</button>
                             </div>
                         </div>
@@ -141,6 +158,35 @@
 
 @section('scripts')
 <script>
+    function uploadPhoto(params) {
+        let image = document.getElementById('photo-file').files[0];
+        let formData = new FormData();
+        formData.append('photo_file', image);
+        formData.append('_token', '{{csrf_token()}}');
+        $.ajax({
+            url: '{{ route('upload-photo') }}',
+            enctype: 'multipart/form-data',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                if (data.code == true) {
+                    $('#image-photo').attr('src', data.data.url);
+                    toastr.options.timeOut = 8000;
+                    toastr.success(data.message);
+                } else {
+                    toastr.options.timeOut = 8000;
+                    toastr.error(data.message);
+                }
+            },
+            error: function(data) {
+                toastr.options.timeOut = 8000;
+                toastr.error(data.message);
+            }
+        });
+    }
+
     function uploadKK() {
         let image = document.getElementById('kk-file').files[0];
         let formData = new FormData();
@@ -206,6 +252,7 @@
         let formData = new FormData($("#form-regis-course")[0]);
         formData.append('kartu_keluarga', document.getElementById("image-kk").src)
         formData.append('bukti_pembayaran', document.getElementById("image-bp").src)
+        formData.append('photo', document.getElementById("image-photo").src)
         $.ajax({
             type:"POST",
             url:form.attr("action"),
@@ -221,6 +268,7 @@
                     document.getElementById("form-regis-course").reset();
                     $('#image-kk').attr('src','https://mdbootstrap.com/img/Photos/Others/placeholder.jpg');
                     $('#image-bp').attr('src','https://mdbootstrap.com/img/Photos/Others/placeholder.jpg');
+                    $('#image-photo').attr('src','https://mdbootstrap.com/img/Photos/Others/placeholder.jpg');
                 } else {
                     toastr.options.timeOut = 8000;
                     toastr.error(response.message); 

@@ -33,10 +33,19 @@
                 <div data-i18n="penggunaAktif">Pengguna Aktif</div>
             </a>
         </li>
-        <li class="menu-item {{ Route::currentRouteName() == 'admin::register-course' ? 'active' : '' }}">
+        <li class="menu-item {{ Route::currentRouteName() == 'admin::register-course' || Route::currentRouteName() == 'admin::register-course-detail' ? 'active' : '' }}">
             <a href="{{ route('admin::register-course') }}" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-account-outline"></i>
                 <div data-i18n="penggunaAktif">Pendaftaran Kursus</div>
+            </a>
+        </li>
+        <li class="menu-header fw-medium mt-4">
+            <span class="menu-header-text">Kelas</span>
+        </li>
+        <li class="menu-item {{ Route::currentRouteName() == 'admin::class-material' || Route::currentRouteName() == 'admin::class-material-detail' ? 'active' : '' }}">
+            <a href="{{ route('admin::class-material') }}" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-file-document-multiple-outline"></i>
+                <div data-i18n="penggunaAktif">Materi</div>
             </a>
         </li>
     </ul>

@@ -3,13 +3,18 @@
         <li><a class="nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}" href="{{ route('home') }}">Home</a></li>
         <li><a class="nav-link" href="#about">Penyewaan Kostum</a></li>
         <li><a class="nav-link" href="#services">Pengembalian Kostum</a></li>
-        <li  style="display: {{ $display_kursus }};"><a class="nav-link {{ Route::currentRouteName() == 'form-register-course' ? 'active' : '' }}" href="{{ route('form-register-course') }}">Daftar Kursus</a></li>
+        <li  style="display: {{ $display_daftar_kursus }};"><a class="nav-link {{ Route::currentRouteName() == 'form-register-course' ? 'active' : '' }}" href="{{ route('form-register-course') }}">Daftar Kursus</a></li>
+        <li  style="display: {{ $display_kelas }};"><a class="nav-link {{ Route::currentRouteName() == 'class' ? 'active' : '' }}" href="{{ route('class', ['kategori' => $kategori]) }}">Kelas</a></li>
         <li><a class="nav-link" href="#profile">Profil Sanggar</a></li>
         @if (session('email'))
             <li class="dropdown">
                 <a href="#">
                     <div class="avatar avatar-online">
-                        <img src="{{ asset('assets/img/avatars/1.png') }}" alt class="w-px-40 h-auto rounded-circle" width="35" height="35">
+                        @if (session('photo') !== null || session('photo') !== '')
+                            <img src="{{ session('photo') }}" alt class="w-px-40 h-auto rounded-circle" width="35" height="35">
+                        @else
+                            <img src="{{ asset('assets/img/avatars/1.png') }}" alt class="w-px-40 h-auto rounded-circle" width="35" height="35">
+                        @endif
                     </div>
                     <span style="padding-left: 10px;">{{ session('email') }}</span>
                 </a>

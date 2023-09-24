@@ -28,19 +28,29 @@ class HomeController extends Controller
     public function index()
     {
         $display = 'block';
-        $display_kursus = 'none';
-        $kategori = '';
-         if(Session::get('id')) {
-            $rc = DB::table('register_course')->where('id_user', Session::get('id'))->first();
-            if(isset($rc->is_verified) == 1) {
+        $display_daftar_kursus = 'none';
+        $display_kelas = 'none';
+        $kategori = 'none';
+        if(Session::get('id')) {
+            $rc = DB::table('register_course')
+                ->join('register_course_detail', 'register_course_detail.id_register_course', 'register_course.id')
+                ->where('id_user', Session::get('id'))
+                ->where('is_verified', 1)
+                ->orderBy('register_course_detail.id', 'desc')
+                ->first();
+
+            $is_verified = isset($rc->is_verified) ? $rc->is_verified : 0;
+            if($is_verified === 1) {
                 $display = 'none';
-                $display_kursus = 'block';
-                $kategori = $rc->kategori_kursus;
+                $kategori = ucfirst($rc->kategori_kursus);
+                $display_kelas = 'block';
             } else {
-                $display_kursus = 'block'; 
+                $display_daftar_kursus = 'block'; 
             }
+         } else {
+            $display_daftar_kursus = 'block';
          }
-         
-         return view('home.index', compact('display', 'display_kursus', 'kategori'));
+
+         return view('home.index', compact('display', 'display_daftar_kursus', 'kategori', 'display_kelas'));
     }
 }
