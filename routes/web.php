@@ -7,9 +7,11 @@ use App\Http\Controllers\Web\Auth\LogoutController;
 use App\Http\Controllers\Web\Auth\RegisterController;
 use App\Http\Controllers\Web\General\HomeController;
 use App\Http\Controllers\Web\General\ClassController;
+use App\Http\Controllers\Web\General\CostumeRentalController;
 use App\Http\Controllers\Web\Admin\DashboardController;
 use App\Http\Controllers\Web\Admin\UserController;
 use App\Http\Controllers\Web\Admin\ClassController as Admin_ClassController;
+use App\Http\Controllers\Web\Admin\CostumeController as Admin_CostumeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +41,8 @@ Route::post('/upload-bp', [RegisterController::class, 'uploadBuktiPembayaran'])-
 Route::get('/kelas/{kategori}', [ClassController::class, 'index'])->name('class');
 Route::get('/kelas/{kategori}/{id}', [ClassController::class, 'indexDetail'])->name('class-video');
 
+Route::get('/penyewaan-kostum-purnama', [CostumeRentalController::class, 'index'])->name('costume-rental');
+
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin::dashboard');
     Route::get('/user-active', [UserController::class, 'userActive'])->name('admin::user-active');
@@ -58,4 +62,13 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/delete-class-material/{id}', [Admin_ClassController::class, 'deleteMateriKursus'])->name('admin::delete-class-material');
 
     Route::post('/add-materi-video', [Admin_ClassController::class, 'addMateriVideo'])->name('admin::add-materi-video');
+
+
+    Route::get('/custom-size', [Admin_CostumeController::class, 'size'])->name('admin::custom-size');
+    Route::post('/custom-size/add', [Admin_CostumeController::class, 'addSize'])->name('admin::add-custom-size');
+    Route::post('/custom-size/edit', [Admin_CostumeController::class, 'editSize'])->name('admin::edit-custom-size');
+
+    Route::get('/custom-type', [Admin_CostumeController::class, 'customType'])->name('admin::custom-type');
+    Route::post('/custom-type/add', [Admin_CostumeController::class, 'addType'])->name('admin::add-custom-type');
+    Route::post('/custom-type/edit', [Admin_CostumeController::class, 'editType'])->name('admin::edit-custom-type');
 });

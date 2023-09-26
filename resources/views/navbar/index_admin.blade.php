@@ -21,7 +21,7 @@
                         </div>
                     </li>
                     <li class="dropdown-notifications-list scrollable-container ps ps--active-y ps--scrolling-y">
-                        <ul class="list-group list-group-flush">
+                        {{-- <ul class="list-group list-group-flush">
                             <li class="list-group-item list-group-item-action dropdown-notifications-item">
                                 <div class="d-flex align-items-center gap-2">
                                     <div class="flex-shrink-0">
@@ -166,7 +166,7 @@
                                     </div>
                                 </div>
                             </li>
-                        </ul>
+                        </ul> --}}
                     </li>
                     <li class="dropdown-menu-footer border-top p-3">
                         <a href="javascript:void(0);" class="btn btn-primary d-flex justify-content-center">Read all notifications</a>

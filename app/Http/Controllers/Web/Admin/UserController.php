@@ -55,7 +55,7 @@ class UserController extends Controller
 
     public function verifiedCourse(Request $request)
     {
-        $update = DB::table('register_course')->where('id', $request->id)->update(['is_verified' => 1]);
+        $update = DB::table('register_course_detail')->where('id', $request->id)->update(['is_verified' => 1]);
 
         return response()->json(['code' => true, 'message' => 'Sukes Verifikasi']);
     }

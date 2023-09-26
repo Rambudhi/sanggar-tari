@@ -45,12 +45,6 @@
             text-decoration: none !important; /* Remove underline */
             cursor: not-allowed !important; /* Change cursor to indicate not clickable */
         }
-
-        /* a.picture {
-            pointer-events: all !important;
-            text-decoration: none !important;
-            cursor: auto !important; 
-        } */
     </style>
 @endsection
 

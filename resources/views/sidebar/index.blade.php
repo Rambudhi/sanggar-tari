@@ -48,6 +48,21 @@
                 <div data-i18n="penggunaAktif">Materi</div>
             </a>
         </li>
+        <li class="menu-header fw-medium mt-4">
+            <span class="menu-header-text">Master</span>
+        </li>
+        <li class="menu-item {{ Route::currentRouteName() == 'admin::custom-type' ? 'active' : '' }}">
+            <a href="{{ route('admin::custom-type') }}" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-file-document-multiple-outline"></i>
+                <div data-i18n="penggunaAktif">Jenis Kustom</div>
+            </a>
+        </li>
+        <li class="menu-item {{ Route::currentRouteName() == 'admin::custom-size' ? 'active' : '' }}">
+            <a href="{{ route('admin::custom-size') }}" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-file-document-multiple-outline"></i>
+                <div data-i18n="penggunaAktif">Ukuran</div>
+            </a>
+        </li>
     </ul>
 
 </aside>

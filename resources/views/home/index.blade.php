@@ -150,6 +150,9 @@
                 <div class="section-title">
                     <h3>Sewa Kostum Purnama<span></span></h3>
                     <p>Yuk sewa kostum sebanyak-banyaknya</p>
+                    <div style="text-align: right;">
+                        <a href="{{ route('costume-rental') }}" style="color: rgb(132, 132, 124);">Tampilkan Semua</a>
+                    </div>
                 </div>
 
                 <div class="row">
