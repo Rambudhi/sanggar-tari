@@ -170,119 +170,91 @@
             <div data-aos="fade-up" data-aos-delay="100">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="input-group pb-3">
-                                    <select class="form-select">
-                                        <option value="">Jenis Kostum</option>
-                                        @foreach ($costume_type as $item)
-                                            <option value="{{ $item->id }}">{{ ucfirst($item ->nama) }}</option>
-                                        @endforeach
-                                    </select>
+                        <form method="GET" action="{{ route('costume-rental') }}">
+                            <div class="row">
+                                {{-- <div class="col-md-3">
+                                    <div class="input-group pb-3">
+                                        <select class="form-select">
+                                            <option value="">Jenis Kostum</option>
+                                            @foreach ($costume_type as $item)
+                                                <option value="{{ $item->id }}">{{ ucfirst($item ->nama) }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div> --}}
+                                <div class="col-md-4">
+                                    <div class="input-group pb-3">
+                                        <select class="form-select" id="size" name="size">
+                                            <option value="">Ukuran</option>
+                                            @foreach ($size as $item)
+                                                <option value="{{ $item->id }}" @if ($size_value == $item->id) selected @endif>{{ ucfirst($item ->nama) }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group pb-3">
+                                        <select class="form-select animation-dropdown me-2 w-100" id="ketegori_kostum" name="ketegori_kostum">
+                                            <option value="">-- Plih Kategori Kostum --</option>
+                                            <option value="DL" @if ($ketegori_kostum === 'DL') selected @endif>Dewasa - Laki</option>
+                                            <option value="DP" @if ($ketegori_kostum === 'DP') selected @endif>Dewasa - Perempuan</option>
+                                            <option value="AL" @if ($ketegori_kostum === 'AL') selected @endif>Anak - Laki</option>
+                                            <option value="AP" @if ($ketegori_kostum === 'AP') selected @endif>Anak - Perempuan</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group pb-3">
+                                        <input type="text" class="form-control" placeholder="Search..." name="costume_type_name">
+                                        <button class="btn btn-primary" type="submit" onclick="window.location.href='/new_page'">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="input-group pb-3">
-                                    <select class="form-select">
-                                        <option value="">Ukuran</option>
-                                        @foreach ($size as $item)
-                                            <option value="{{ $item->id }}">{{ ucfirst($item ->nama) }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="input-group pb-3">
-                                    <select class="form-select">
-                                        <option>Type</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="input-group pb-3">
-                                    <input type="text" class="form-control" placeholder="Search...">
-                                    <button class="btn btn-primary" type="button">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        </form>
                         <div class="primary-container">
                             <div class="primary-image"> 
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
-                                        <a href="" class="picture">
-                                            <div class="member box">
-                                                <div class="member-img">
-                                                  <img src="{{ asset('assets/img/kostum-1.svg') }}" class="img-fluid pb-2" alt="" style="height: 300px;">
+                                    @forelse ($costume_type_list as $item)
+                                        <div class="col-lg-3 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                                            <a href="{{ route('costume-rental-by-custome', ['id' => $item->id]) }}" class="picture">
+                                                <div class="member box">
+                                                    <div class="member-img">
+                                                        <img src="{{ $item->image }}" class="img-fluid pb-2" alt="" style="height: 250px; width: 300px; border-radius: 10px">
+                                                    </div>
+                                                    <div class="member-info">
+                                                        <h4>{{ $item->nama }}</h4>
+                                                    </div>
                                                 </div>
-                                                <div class="member-info">
-                                                    <h4>Baju Tari Madura</h4>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
-                                        <a href="" class="picture">
-                                            <div class="member box">
-                                                <div class="member-img">
-                                                  <img src="{{ asset('assets/img/kostum-1.svg') }}" class="img-fluid pb-2" alt="" style="height: 300px;">
-                                                </div>
-                                                <div class="member-info">
-                                                    <h4>Baju Tari Madura</h4>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
-                                        <a href="" class="picture">
-                                            <div class="member box">
-                                                <div class="member-img">
-                                                  <img src="{{ asset('assets/img/kostum-1.svg') }}" class="img-fluid pb-2" alt="" style="height: 300px;">
-                                                </div>
-                                                <div class="member-info">
-                                                    <h4>Baju Tari Madura</h4>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
-                                        <a href="" class="picture">
-                                            <div class="member box">
-                                                <div class="member-img">
-                                                  <img src="{{ asset('assets/img/kostum-1.svg') }}" class="img-fluid pb-2" alt="" style="height: 300px;">
-                                                </div>
-                                                <div class="member-info">
-                                                    <h4>Baju Tari Madura</h4>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
+                                            </a>
+                                        </div>
+                                    @empty
+                                        <div class="col-lg-12 col-md-12 align-items-center aos-init aos-animate" data-aos="fade-up" data-aos-delay="100" style="text-align: center;">
+                                            <p>Tidak Ditemukan Data</p>
+                                        </div>
+                                    @endforelse
                                 </div>  
-
-                                {{-- <div class="row">
-                                    <ul class="pagination">
-                                        @if ($kategori_materi->currentPage() > 1)
-                                            <li><a href="{{ $kategori_materi->previousPageUrl() }}" class="btn btn-info">Sebelumnya</a></li>                        
-                                        @else
-                                            <li><a href="{{ $kategori_materi->previousPageUrl() }}" class="btn btn-info disabled">Sebelumnya</a></li>
-                                        @endif
-                    
-                                        @for ($i = 1; $i <= $kategori_materi->lastPage(); $i++)
-                                            <li><a href="{{ $kategori_materi->url($i) }}" class="btn {{ $kategori_materi->currentPage() === $i ? 'btn-info active' : 'btn-secondary' }}">{{ $i }}</a></li>
-                                        @endfor
-                    
-                                        @if ($kategori_materi->hasMorePages())
-                                            <li><a href="{{ $kategori_materi->nextPageUrl() }}" class="btn btn-info">Selanjutnya</a></li>
-                                        @else
-                                            <li><a href="{{ $kategori_materi->nextPageUrl() }}" class="btn btn-info disabled">Selanjutnya</a></li>
-                                        @endif
-                                    </ul>
-                                </div> --}}
                             </div>
+                        </div>
+                        <div class="row">
+                            <ul class="pagination">
+                                @if ($costume_type_list->currentPage() > 1)
+                                    <li><a href="{{ $costume_type_list->previousPageUrl() }}" class="btn btn-info">Sebelumnya</a></li>                        
+                                @else
+                                    <li><a href="{{ $costume_type_list->previousPageUrl() }}" class="btn btn-info disabled">Sebelumnya</a></li>
+                                @endif
+            
+                                @for ($i = 1; $i <= $costume_type_list->lastPage(); $i++)
+                                    <li><a href="{{ $costume_type_list->url($i) }}" class="btn {{ $costume_type_list->currentPage() === $i ? 'btn-info active' : 'btn-secondary' }}">{{ $i }}</a></li>
+                                @endfor
+            
+                                @if ($costume_type_list->hasMorePages())
+                                    <li><a href="{{ $costume_type_list->nextPageUrl() }}" class="btn btn-info">Selanjutnya</a></li>
+                                @else
+                                    <li><a href="{{ $costume_type_list->nextPageUrl() }}" class="btn btn-info disabled">Selanjutnya</a></li>
+                                @endif
+                            </ul>
                         </div>
                     </div>
                 </div>

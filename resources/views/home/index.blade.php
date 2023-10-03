@@ -160,90 +160,22 @@
                         <div class="splide">
                             <div class="splide__track">
                                 <div class="splide__list">
-                                    <div class="col-md-4 splide__slide m-2">
-                                        <div class="card">
-                                            <img class="img-fluid" alt="100%x280" src="{{ asset('assets/img/kostum-1.svg') }}">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Kostum Tari Adat Batak</h5>
-                                                <p class="card-text">Penyewaan 3 hari</p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <p class="card-text">Rp. 100.000</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 splide__slide m-2">
-                                        <div class="card">
-                                            <img class="img-fluid" alt="100%x280" src="{{ asset('assets/img/kostum-2.svg') }}">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Kostum Tari Adat Batak</h5>
-                                                <p class="card-text">Penyewaan 3 hari</p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <p class="card-text">Rp. 100.000</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 splide__slide m-2">
-                                        <div class="card">
-                                            <img class="img-fluid" alt="100%x280" src="{{ asset('assets/img/kostum-3.svg') }}">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Kostum Tari Adat Batak</h5>
-                                                <p class="card-text">Penyewaan 3 hari</p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <p class="card-text">Rp. 100.000</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 splide__slide m-2">
-                                        <div class="card">
-                                            <img class="img-fluid" alt="100%x280" src="{{ asset('assets/img/kostum-4.svg') }}">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Kostum Tari Adat Batak</h5>
-                                                <p class="card-text">Penyewaan 3 hari</p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <p class="card-text">Rp. 100.000</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 splide__slide m-2">
-                                        <div class="card">
-                                            <img class="img-fluid" alt="100%x280" src="{{ asset('assets/img/kostum-5.svg') }}">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Special title treatment</h5>
-                                                <p class="card-text">Penyewaan 3 hari</p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <p class="card-text">Rp. 100.000</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 splide__slide m-2">
-                                        <div class="card">
-                                            <img class="img-fluid" alt="100%x280" src="{{ asset('assets/img/kostum-1.svg') }}">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Special title treatment</h5>
-                                                <p class="card-text">Penyewaan 3 hari</p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <p class="card-text">Rp. 100.000</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 splide__slide m-2">
-                                        <div class="card">
-                                            <img class="img-fluid" alt="100%x280" src="{{ asset('assets/img/kostum-2.svg') }}">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Special title treatment</h5>
-                                                <p class="card-text">Penyewaan 3 hari</p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <p class="card-text">Rp. 100.000</p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @foreach ($costume_type_list as $item)
+                                        <div class="col-md-4 splide__slide m-2">
+                                            <a href="{{ route('costume-rental-by-custome', ['id' => $item->id]) }}">
+                                                <div class="card">
+                                                    <img class="img-fluid" alt="100%x280" src="{{ $item->image }}">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">{{ $item->nama }}</h5>
+                                                        <p class="card-text">Penyewaan {{ $item->jangka_waktu_sewa }} hari</p>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <p class="card-text">Rp. {{ number_format($item->harga, 0, ',', '.') }}</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div> 
+                                    @endforeach
                                 </div>
                             </div>
                         </div>

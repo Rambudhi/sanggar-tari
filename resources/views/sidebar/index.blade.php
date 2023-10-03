@@ -40,6 +40,21 @@
             </a>
         </li>
         <li class="menu-header fw-medium mt-4">
+            <span class="menu-header-text">Transaksi</span>
+        </li>
+        <li class="menu-item {{ Route::currentRouteName() == 'admin::taking-rental-costume' ? 'active' : '' }}">
+            <a href="{{ route('admin::taking-rental-costume') }}" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-cart-outline"></i>
+                <div data-i18n="pengambilanKostum">Pengambilan Kostum</div>
+            </a>
+        </li>
+        <li class="menu-item {{ Route::currentRouteName() == 'admin::return-rental-costume' ? 'active' : '' }}">
+            <a href="{{ route('admin::return-rental-costume') }}" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-cart-outline"></i>
+                <div data-i18n="pengembalianKostum">Pengembalian Kostum</div>
+            </a>
+        </li>
+        <li class="menu-header fw-medium mt-4">
             <span class="menu-header-text">Kelas</span>
         </li>
         <li class="menu-item {{ Route::currentRouteName() == 'admin::class-material' || Route::currentRouteName() == 'admin::class-material-detail' ? 'active' : '' }}">
@@ -51,7 +66,7 @@
         <li class="menu-header fw-medium mt-4">
             <span class="menu-header-text">Master</span>
         </li>
-        <li class="menu-item {{ Route::currentRouteName() == 'admin::custom-type' ? 'active' : '' }}">
+        <li class="menu-item {{ Route::currentRouteName() == 'admin::custom-type' || Route::currentRouteName() == 'admin::custom-type-detail' ? 'active' : '' }}">
             <a href="{{ route('admin::custom-type') }}" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-file-document-multiple-outline"></i>
                 <div data-i18n="penggunaAktif">Jenis Kustom</div>

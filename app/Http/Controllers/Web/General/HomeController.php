@@ -47,10 +47,16 @@ class HomeController extends Controller
             } else {
                 $display_daftar_kursus = 'block'; 
             }
-         } else {
+        } else {
             $display_daftar_kursus = 'block';
-         }
+        }
 
-         return view('home.index', compact('display', 'display_daftar_kursus', 'kategori', 'display_kelas'));
+        $costume_type_list = DB::table('costume_type as ct')
+            ->join('costume_type_details as ctd', 'ctd.id_costume_type', 'ct.id')
+            ->select('ct.id', 'ct.nama', 'ctd.image', 'ctd.harga', 'ctd.jangka_waktu_sewa')
+            ->where('is_favorite', true)
+            ->groupBy('ct.id', 'ct.nama', 'ctd.image', 'ctd.harga', 'ctd.jangka_waktu_sewa')
+            ->get();
+         return view('home.index', compact('display', 'display_daftar_kursus', 'kategori', 'display_kelas', 'costume_type_list'));
     }
 }

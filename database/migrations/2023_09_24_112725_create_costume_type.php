@@ -14,8 +14,12 @@ class CreateCostumeType extends Migration
     public function up()
     {
         Schema::create('costume_type', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('nama', 50);
+            $table->index('id_size');
+            $table->integer('id_size')->unsigned()->nullable();
+            $table->foreign('id_size')->references('id')->on('size');
+            $table->char('ketegori_kostum', 2);
         });
     }
 

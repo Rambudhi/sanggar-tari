@@ -21,6 +21,7 @@ Pendaftaran Kursus
             <table id="example" class="datatables-basic table table-bordered">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>ID</th>
                         <th>Nama Lengkap</th>
                         <th>Pendidikan</th>
@@ -36,7 +37,8 @@ Pendaftaran Kursus
                 <tbody>
                     @foreach ($register_course as $item)
                         <tr>
-                            <td style="height: 50px;">{{ $item->id }}</td>
+                            <td></td>
+                            <td>{{ $item->id }}</td>
                             <td>{{ $item->nama_depan }}  {{ $item->nama_belakang }}</td>
                             <td>{{ $item->pendidikan }}</td>
                             <td>{{ $item->nomor_telepon }}</td>
@@ -62,6 +64,12 @@ Pendaftaran Kursus
                                         <li>
                                             <a class="dropdown-item" onclick="onLiClick('{{ json_encode($item) }}')" data-items="">
                                                 <span class="align-middle">Edit</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('admin::delete-register-course', ['id' => $item->id, 'id_user' => $item->id_user]) }}">
+                                                @csrf
+                                                <span class="align-middle">Delete</span>
                                             </a>
                                         </li>
                                     </ul>

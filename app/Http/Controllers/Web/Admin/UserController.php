@@ -152,4 +152,16 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'Gagal  Edit Data Register Kursus ' . $e->getMessage());
         }
     }
+
+    public function deleteRegisterCourse($id, $id_user){
+        try {
+            DB::table('register_course_detail')->where('id_register_course', $id)->delete();
+            DB::table('register_course')->where('id', $id)->delete();
+            DB::table('users')->where('id', $id_user)->delete();
+
+            return redirect()->route('admin::register-course')->with('success', 'Berhasil Menghapus User');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Gagal Menghapus User ' . $e->getMessage());
+        }
+    }
 }

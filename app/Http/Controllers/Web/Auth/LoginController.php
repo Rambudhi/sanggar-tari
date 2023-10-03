@@ -32,12 +32,17 @@ class LoginController extends Controller
 
     public function formLogin()
     {
-        if (Session::has('name')) 
+        if (Session::get('user_type')) 
         {
-            return redirect()->route('home::dashboard');
-        } else {
-            return view('login.index');
-        }
+            return redirect()->route('home');
+        } 
+
+        if (Session::get('user_type_admin')) 
+        {
+            return redirect()->route('admin::dashboard');
+        } 
+            
+        return view('login.index');
     }
 
     public function doLogin(Request $request)

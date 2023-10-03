@@ -16,7 +16,7 @@ Jenis Kustom
                 <button class="dt-button create-new btn btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button" data-bs-toggle="modal" data-bs-target="#basicModal">
                     <span>
                         <i class="mdi mdi-plus me-sm-1"></i> 
-                        <span class="d-none d-sm-inline-block">Tambah Ukuran</span>
+                        <span class="d-none d-sm-inline-block">Tambah Jenis Kustom</span>
                     </span>
                 </button> 
             </div>
@@ -27,6 +27,8 @@ Jenis Kustom
                     <tr>
                         <th>ID</th>
                         <th>Nama</th>
+                        <th>Size</th>
+                        <th>Kategori Baju</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -35,11 +37,31 @@ Jenis Kustom
                         <tr>
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->nama }}</td>
+                            <td>{{ $item->nama_size }}</td>
+                            <td>
+                                @if ($item->ketegori_kostum === 'DL')
+                                    Dewasa - Laki
+                                @elseif ($item->ketegori_kostum === 'DP')
+                                    Dewasa - Perempuan
+                                @elseif ($item->ketegori_kostum === 'AL')
+                                    Anak - Laki
+                                @elseif ($item->ketegori_kostum === 'AP')
+                                    Anak - Laki
+                                @endif
+                            </td>
                             <td>
                                 <div class="d-inline-block">
-                                    <a href="javascript:;" class="btn btn-sm btn-text-secondary rounded-pill btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" data-bs-toggle="dropdown">
                                         <i class="mdi mdi-dots-vertical"></i>
                                     </a>
+                                    <ul class="dropdown-menu dropdown-menu-end mt-3 py-2">
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('admin::custom-type-detail', ['id' => $item->id]) }}">
+                                                @csrf
+                                                <span class="align-middle">Detail</span>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </div>
                             </td>
                         </tr>
@@ -56,15 +78,42 @@ Jenis Kustom
                 <form action="{{ route('admin::add-custom-type') }}" method="POST" role="form" id="form-add-course-material" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-header">
-                        <h4 class="modal-title" id="exampleModalLabel1">Tambah Materi Kursus</h4>
+                        <h4 class="modal-title" id="exampleModalLabel1">Tambah Kostum</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="row">
                             <div class="col mb-4 mt-2">
                                 <div class="form-floating form-floating-outline">
-                                    <input type="text" id="nama_size" class="form-control" name="nama_size">
-                                    <label for="nama_size">Nama Ukuran</label>
+                                    <input type="text" id="nama_custome" class="form-control" name="nama_custome">
+                                    <label for="nama_custome">Nama Kostum</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-4 mt-2">
+                                <div class="form-floating form-floating-outline">
+                                    <select class="form-select animation-dropdown me-2 w-100" id="id_size" name="id_size">
+                                        <option value="">-- Plih Ukuran --</option>
+                                        @foreach ($size as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                    <label for="id_size">Ukuran</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-4 mt-2">
+                                <div class="form-floating form-floating-outline">
+                                    <select class="form-select animation-dropdown me-2 w-100" id="ketegori_kostum" name="ketegori_kostum">
+                                        <option value="">-- Plih Kategori Kostum --</option>
+                                        <option value="DL">Dewasa - Laki</option>
+                                        <option value="DP">Dewasa - Perempuan</option>
+                                        <option value="AL">Anak - Laki</option>
+                                        <option value="AL">Anak - Perempuan</option>
+                                    </select>
+                                    <label for="ketegori_kostum">Kategori Kostum</label>
                                 </div>
                             </div>
                         </div>
