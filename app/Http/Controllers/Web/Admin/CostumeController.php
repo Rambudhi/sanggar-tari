@@ -372,7 +372,7 @@ class CostumeController extends Controller
         $trx_custome_rental = DB::table('trx_custome_rental as tcr')
                 ->join('costume_type_details as ctd', 'ctd.id', 'tcr.id_costume_type_detail')
                 ->join('costume_type as ct', 'ct.id', 'tcr.id_costume_type')
-                ->join('register_course as rc', 'rc.id_user', 'tcr.id_user')
+                ->join('users as u', 'u.id', 'tcr.id_user')
                 ->select(
                     'ctd.image', 
                     'ct.nama', 
