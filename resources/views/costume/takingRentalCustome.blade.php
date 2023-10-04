@@ -38,7 +38,7 @@ Pengambilan Kostum
                         <tr>
                             <td></td>
                             <td>{{ $item->id_transaksi }}</td>
-                            <td>{{ $item->nama_depan }} {{ $item->nama_belakang }}</td>
+                            <td>{{ $item->email }}</td>
                             <td>{{ $item->nama }}</td>
                             <td>
                                 <img src="{{ $item->image }}" alt="" width="100" height="100">
