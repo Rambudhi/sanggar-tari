@@ -16,11 +16,11 @@ Dahsboard
           <div class="card-body">
             <div class="d-flex align-items-center justify-content-between">
               <div class="content-left">
-                <h5 class="mb-1">245</h5>
-                <small>Transaksi Hari ini</small>
+                <h5 class="mb-1">{{ $data['dipesan'] }}</h5>
+                <small>Jumlah Kostum yang di Pesan</small>
               </div>
               <span class="badge bg-label-primary rounded-circle p-2">
-                <i class="mdi mdi-cart-outline mdi-24px"></i>
+                <i class="mdi mdi-package-up mdi-24px"></i>
               </span>
             </div>
           </div>
@@ -31,11 +31,11 @@ Dahsboard
           <div class="card-body">
             <div class="d-flex align-items-center justify-content-between">
               <div class="content-left">
-                <h5 class="mb-1">Rp12.583.472</h5>
-                <small>Amount Transaksi Hari Ini</small>
+                <h5 class="mb-1">{{ $data['dibatalkan'] }}</h5>
+                <small>Jumlah Kostum yang di Batalkan</small>
               </div>
               <span class="badge bg-label-success rounded-circle p-2">
-                <i class="mdi mdi-currency-usd mdi-24px"></i>
+                <i class="mdi mdi-bookmark-remove mdi-24px"></i>
               </span>
             </div>
           </div>
@@ -46,11 +46,11 @@ Dahsboard
           <div class="card-body">
             <div class="d-flex align-items-center justify-content-between">
               <div class="content-left">
-                <h5 class="mb-1">13</h5>
-                <small>Transaksi Doku Reversal</small>
+                <h5 class="mb-1">{{ $data['diambil'] }}</h5>
+                <small>Jumlah Kostum yang di Sewa</small>
               </div>
               <span class="badge bg-label-danger rounded-circle p-2">
-                <i class="mdi mdi-refresh mdi-24px"></i>
+                <i class="mdi mdi-tshirt-v mdi-24px"></i>
               </span>
             </div>
           </div>
@@ -61,11 +61,11 @@ Dahsboard
           <div class="card-body">
             <div class="d-flex align-items-center justify-content-between">
               <div class="content-left">
-                <h5 class="mb-1">Rp12.583.472</h5>
-                <small>Amount Transaksi Sebulan</small>
+                <h5 class="mb-1">{{ $data['disetujui'] }}</h5>
+                <small>Jumlah Kostum yang di Kembalikan</small>
               </div>
               <span class="badge bg-label-info rounded-circle p-2">
-                <i class="mdi mdi-currency-usd mdi-24px"></i>
+                <i class="mdi mdi-refresh mdi-24px"></i>
               </span>
             </div>
           </div>
@@ -73,51 +73,17 @@ Dahsboard
       </div>
     </div>
     
-    <div class="col-lg-12 col-md-6">
+    <div class="col-lg-4 col-md-6">
         <div class="card h-100">
           <div class="card-header pb-1">
             <div class="d-flex justify-content-between">
-              <h5 class="mb-1">Transaksi Bulanan</h5>
-              <div class="dropdown">
-                <button class="btn p-0" type="button" id="weeklySalesDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="mdi mdi-dots-vertical mdi-24px"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="weeklySalesDropdown">
-                  <a class="dropdown-item waves-effect" href="javascript:void(0);">Last 28 Days</a>
-                  <a class="dropdown-item waves-effect" href="javascript:void(0);">Last Month</a>
-                  <a class="dropdown-item waves-effect" href="javascript:void(0);">Last Year</a>
-                </div>
-              </div>
+              <h5 class="mb-1">Total yang daftar Kursus</h5>
             </div>
-            <p class="text-body mb-0">Total 245 Sales</p>
+            <p class="text-body mb-0"></p>
           </div>
           <div class="card-body" style="position: relative;">
             <div id="weeklySalesChart" style="min-height: 250px;">
               <div id="chart"></div>
-            </div>
-            <div class="d-flex align-items-center justify-content-around mt-3">
-              <div class="d-flex align-items-center">
-                <div class="avatar">
-                  <div class="avatar-initial bg-label-primary rounded">
-                    <i class="mdi mdi-trending-up mdi-24px"></i>
-                  </div>
-                </div>
-                <div class="ms-3 d-flex flex-column">
-                  <h6 class="mb-1">1.000</h6>
-                  <small>Transaksi</small>
-                </div>
-              </div>
-              <div class="d-flex align-items-center">
-                <div class="avatar">
-                  <div class="avatar-initial bg-label-success rounded">
-                    <i class="mdi mdi-currency-usd mdi-24px"></i>
-                  </div>
-                </div>
-                <div class="ms-3 d-flex flex-column">
-                  <h6 class="mb-1">$482k</h6>
-                  <small>Total Profit</small>
-                </div>
-              </div>
             </div>
           <div class="resize-triggers"><div class="expand-trigger"><div style="width: 449px; height: 350px;"></div></div><div class="contract-trigger"></div></div></div>
         </div>
@@ -127,71 +93,29 @@ Dahsboard
 
 @section('scripts')
 <script>
+    var register_course = @json($data['register_course']);
+    var courseObject = register_course[0];
+    var keys = Object.keys(courseObject);
+
     var options = {
-        series: [{
-          data: [21, 22, 10, 38, 16, 21, 13, 21, 22, 10, 38, 16, 21, 13, 21, 22, 10, 38, 16, 21, 13, 21, 22, 10, 38, 16, 21, 13]
-        }],
-        chart: {
-          height: 400,
-          type: 'bar',
-          events: {
-            click: function(chart, w, e) {
-              // console.log(chart, w, e)
+          series: [parseInt(courseObject.Basic), parseInt(courseObject.Junior), parseInt(courseObject.Remaja), parseInt(courseObject.Lansia)],
+          chart: {
+          width: 380,
+          type: 'pie',
+        },
+        labels: keys,
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
             }
           }
-        },
-        // colors: colors,
-        plotOptions: {
-          bar: {
-            columnWidth: '15%',
-            distributed: true,
-          }
-        },
-        dataLabels: {
-          enabled: false
-        },
-        legend: {
-          show: false
-        },
-        xaxis: {
-          categories: [
-            'S',
-            'M',
-            'T',
-            'W',
-            'T',
-            'F',
-            'S',
-            'S',
-            'M',
-            'T',
-            'W',
-            'T',
-            'F',
-            'S',
-            'S',
-            'M',
-            'T',
-            'W',
-            'T',
-            'F',
-            'S',
-            'S',
-            'M',
-            'T',
-            'W',
-            'T',
-            'F',
-            'S', 
-          ],
-          labels: {
-            style: {
-              // colors: colors,
-              fontSize: '12px'
-            }
-          }
-        }
-    };
+        }]
+        };
 
     var chart = new ApexCharts(document.querySelector("#chart"), options);
     chart.render();
