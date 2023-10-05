@@ -77,7 +77,7 @@ Pengambilan Kostum
                 <form action="{{ route('admin::edit-taking-rental-costume') }}" method="POST" role="form" id="form-edit-taking-rental-customer" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-header">
-                        <h4 class="modal-title" id="exampleModalLabel1">Edit Materi Kursus</h4>
+                        <h4 class="modal-title" id="exampleModalLabel1">Edit Pengambilan Kostum</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">

@@ -7,10 +7,6 @@
             color: white !important;
             border-color: #D220FF !important; 
         }
-
-        .img-fluid {
-            max-height: 300px !important;
-        }
     </style>
 @endsection
 

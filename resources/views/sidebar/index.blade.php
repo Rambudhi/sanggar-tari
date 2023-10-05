@@ -55,6 +55,15 @@
             </a>
         </li>
         <li class="menu-header fw-medium mt-4">
+            <span class="menu-header-text">History Penyawaan</span>
+        </li>
+        <li class="menu-item {{ Route::currentRouteName() == 'admin::list-rental-costume' ? 'active' : '' }}">
+            <a href="{{ route('admin::list-rental-costume') }}" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-file-document-multiple-outline"></i>
+                <div data-i18n="historyPenyewaanKostum">Kostum</div>
+            </a>
+        </li>
+        <li class="menu-header fw-medium mt-4">
             <span class="menu-header-text">Kelas</span>
         </li>
         <li class="menu-item {{ Route::currentRouteName() == 'admin::class-material' || Route::currentRouteName() == 'admin::class-material-detail' ? 'active' : '' }}">

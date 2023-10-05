@@ -176,7 +176,7 @@ class CostumeController extends Controller
 
             $rules = [
                 'id_costume_type' => 'required|string|max:50',
-                'image' => 'required|image|mimes:jpeg,jpg,png',
+                'image' => 'required|image|mimes:jpeg,jpg,png|dimensions:width=310,height=283',
                 'kondisi' => 'required|string',
                 'aksesoris' => 'required|string',
                 'bahan' => 'required|string',
@@ -186,8 +186,12 @@ class CostumeController extends Controller
                 'stock' => 'required|string',
                 'is_favorite' => 'required|boolean',
             ];
+            
+            $message = [
+                'image.dimensions' => 'The :attribute must be a maximum of 310 pixels in width and 283 pixels in height.',
+            ];
     
-            $validator = Validator::make($data, $rules);
+            $validator = Validator::make($data, $rules, $message);
             if ($validator->fails()) {
                 $errors = '';
                 foreach($validator->messages()->messages() as $error) {
@@ -240,7 +244,7 @@ class CostumeController extends Controller
 
             $validator = Validator::make($request->all(), [
                 'id_costume_type' => 'required',
-                'image' => 'nullable|image|mimes:jpeg,jpg,png',
+                'image' => 'nullable|image|mimes:jpeg,jpg,png|dimensions:width=310,height=283',
                 'kondisi' => 'required|string',
                 'aksesoris' => 'required|string',
                 'bahan' => 'required|string',
@@ -249,6 +253,9 @@ class CostumeController extends Controller
                 'jangka_waktu_sewa' => 'required|string',
                 'stock' => 'required|string',
                 'is_favorite' => 'required|boolean',
+            ],
+            [
+                'image.dimensions' => 'The :attribute must be a maximum of 310 pixels in width and 283 pixels in height.',
             ]);
 
             if ($validator->fails()) {
@@ -386,8 +393,6 @@ class CostumeController extends Controller
                     'u.email',
                 )
                 ->where('tcr.status', 'DIPESAN')
-                ->orWhere('tcr.status', 'DIAMBIL')
-                ->orWhere('tcr.status', 'DIBATALKAN')
                 ->orderBy('tcr.id', 'DESC')
                 ->get();
 
@@ -544,5 +549,31 @@ class CostumeController extends Controller
         } catch (Exception $e) {
             return redirect()->route('admin::return-rental-costume')->with('error', 'Gagal Merubah Pengembalian Kostum ' . $e->getMessage());
         }
+    }
+
+    public function indexListRentalCostume()
+    {
+        $trx_custome_rental = DB::table('trx_custome_rental as tcr')
+            ->join('costume_type_details as ctd', 'ctd.id', 'tcr.id_costume_type_detail')
+            ->join('costume_type as ct', 'ct.id', 'tcr.id_costume_type')
+            ->join('users as u', 'u.id', 'tcr.id_user')
+            ->select(
+                'ctd.image', 
+                'ct.nama', 
+                'tcr.quantity', 
+                'tcr.harga', 
+                'tcr.total_harga',
+                'tcr.status', 
+                'tcr.id as id_transaksi', 
+                'tcr.tgl_pembayaran', 
+                'tcr.bukti_pembayaran', 
+                'tcr.tgl_pengambilan', 
+                'tcr.tgl_pengembalian', 
+                'u.email',
+            )
+            ->orderBy('tcr.id', 'DESC')
+            ->get();
+
+        return view('costume.listRentalCustome', compact('trx_custome_rental')); 
     }
 }

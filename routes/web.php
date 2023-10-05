@@ -89,5 +89,7 @@ Route::middleware(['checkSession'])->group(function () {
 
         Route::get('/return-rental-costume', [Admin_CostumeController::class, 'indexReturnRentalCostume'])->name('admin::return-rental-costume');
         Route::post('/return-rental-costume/edit', [Admin_CostumeController::class, 'editReturnRentalCostume'])->name('admin::edit-return-rental-costume');
+
+        Route::get('/list-rental-costume', [Admin_CostumeController::class, 'indexListRentalCostume'])->name('admin::list-rental-costume');
     });
 });
