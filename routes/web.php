@@ -12,6 +12,7 @@ use App\Http\Controllers\Web\Admin\DashboardController;
 use App\Http\Controllers\Web\Admin\UserController;
 use App\Http\Controllers\Web\Admin\ClassController as Admin_ClassController;
 use App\Http\Controllers\Web\Admin\CostumeController as Admin_CostumeController;
+use App\Http\Controllers\Web\Admin\ScheduleController as Admin_ScheduleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,5 +92,10 @@ Route::middleware(['checkSession'])->group(function () {
         Route::post('/return-rental-costume/edit', [Admin_CostumeController::class, 'editReturnRentalCostume'])->name('admin::edit-return-rental-costume');
 
         Route::get('/list-rental-costume', [Admin_CostumeController::class, 'indexListRentalCostume'])->name('admin::list-rental-costume');
+
+        Route::get('/schedule-course-by-category', [Admin_ScheduleController::class, 'index'])->name('admin::schedule-course-by-category');
+        Route::post('/add-schedule-course-by-category', [Admin_ScheduleController::class, 'addScheduleCourse'])->name('admin::add-schedule-course-by-category');
+        Route::post('/edit-schedule-course-by-category', [Admin_ScheduleController::class, 'editScheduleCourse'])->name('admin::edit-schedule-course-by-category');
+        Route::get('/delete-schedule-course-by-category/{id}', [Admin_ScheduleController::class, 'deleteScheduleCourse'])->name('admin::delete-schedule-course-by-category');
     });
 });

@@ -173,6 +173,20 @@ class CostumeRentalController extends Controller
         try {
             $data = $request->all();
 
+            $rules = [
+                'tgl_pengambilan' => 'required|string',
+                'tgl_pengembalian' => 'required|string',
+            ];
+    
+            $validator = Validator::make($data, $rules);
+            if ($validator->fails()) {
+                $errors = '';
+                foreach($validator->messages()->messages() as $error) {
+                    $errors .= str_replace('.', '', $error[0] . ', ');
+                }
+                return response()->json(['code' => false, 'message' => $errors]);
+            }
+
             $record = [
                 'id_user' => $data['id_user'],
                 'id_costume_type' => $data['id_costume_type'],
@@ -180,7 +194,9 @@ class CostumeRentalController extends Controller
                 'quantity' => $data['quantity'],
                 'harga' => (int) str_replace('.', '', $data['harga']),
                 'total_harga' => (int) str_replace('.', '', $data['total_harga']),
-                'status' => 'DIPESAN'
+                'status' => 'DIPESAN',
+                'tgl_pengambilan' => $data['tgl_pengambilan'],
+                'tgl_pengembalian' => $data['tgl_pengembalian'],
             ];
 
             DB::table('trx_custome_rental')->insert($record);

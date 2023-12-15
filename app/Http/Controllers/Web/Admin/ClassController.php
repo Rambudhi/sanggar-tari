@@ -156,6 +156,8 @@ class ClassController extends Controller
                 'video' => 'required|mimes:mp4,avi,mov,wmv|max:204800',
                 'desc' => 'required|string',
                 'order_seq' => 'required|numeric|unique:kategori_materi_detail,order_seq',
+                'image' => 'required|image|mimes:jpeg,jpg,png',
+                'deskripsi_image' => 'required|string',
             ];
     
             $validator = Validator::make($data, $rules);
@@ -173,14 +175,22 @@ class ClassController extends Controller
             $myVideo = $request->file('video')->getClientOriginalName();
             $data['video']->move(public_path($destinationPath), $myVideo);
 
+            $destinationPath = 'Image' . '/' . $data['id_kategori_kursus'] . '/' . ucfirst($data['nama']);
+            $myImage = $request->file('image')->getClientOriginalName();
+            $data['image']->move(public_path($destinationPath), $myImage);
+
             $url_video = env('APP_URL') .'/'. $destinationPath . '/' . $myVideo;
+
+            $url_image = env('APP_URL') .'/'. $destinationPath . '/' . $myImage;
 
             $insert = [
                 'id_kategori_kursus' => $data['id_kategori_kursus'],
                 'nama' => $data['nama'],
                 'video' => $url_video,
                 'desc' => $data['desc'],
-                'order_seq' => $data['order_seq']
+                'order_seq' => $data['order_seq'],
+                'image' => $url_image,
+                'deskripsi_image' => $data['deskripsi_image'],
             ];
          
             $kategori_materi_detail = DB::table('kategori_materi_detail')->insert($insert);

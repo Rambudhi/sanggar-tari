@@ -5,7 +5,7 @@
         .btn-primary {
             background-color: #D220FF !important;
             color: white !important;
-            border-color: #D220FF !important; 
+            border-color: #D220FF !important;
         }
     </style>
 @endsection
@@ -24,7 +24,8 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-6 d-flex align-items-stretch ">
-                        <img class="logo-tari" src="{{ asset('assets/img/tari.svg') }}" height="550" width="750" alt="">
+                        <img class="logo-tari" src="{{ asset('assets/img/tari.svg') }}" height="550" width="750"
+                            alt="">
                     </div>
                 </div>
             </div>
@@ -40,22 +41,26 @@
                     <!-- Button trigger modal -->
                     <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
                         <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-                            <h4 class="title text-center"><a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Daftar Kursus</a></h4>
-                            <div class="icon"><img src="{{ asset('assets/img/register.svg') }}" class="img-fluid" alt="..."></div>
-                        </div> 
+                            <h4 class="title text-center"><a type="button" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">Daftar Kursus</a></h4>
+                            <div class="icon"><img src="{{ asset('assets/img/register.svg') }}" class="img-fluid"
+                                    alt="..."></div>
+                        </div>
                     </div>
-                    
+
                     <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
                         <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
                             <h4 class="title text-center"><a href="">Sewa Kostum</a></h4>
-                            <div class="icon"><img src="{{ asset('assets/img/sewa-kustom-icon.svg') }}" class="img-fluid" style="height: 240px !important; width: 260px; !important;" alt="..." ></div>
+                            <div class="icon"><img src="{{ asset('assets/img/sewa-kustom-icon.svg') }}" class="img-fluid"
+                                    style="height: 240px !important; width: 260px; !important;" alt="..."></div>
                         </div>
                     </div>
 
                     <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
                         <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
                             <h4 class="title text-center"><a href="">Materi Kursus</a></h4>
-                            <div class="icon"><img src="{{ asset('assets/img/materi-kursus-icon.svg') }}" class="img-fluid" alt="..."></div>
+                            <div class="icon"><img src="{{ asset('assets/img/materi-kursus-icon.svg') }}"
+                                    class="img-fluid" alt="..."></div>
                         </div>
                     </div>
                 </div>
@@ -65,12 +70,12 @@
         <!-- ======= Team Section ======= -->
         <section id="team" class="team" style="display: {{ $display }}">
             <div class="container" data-aos="fade-up">
-        
+
                 <div class="section-title">
                     <h2>Pilih Paket Tari</h2>
                     <p>life will always change.</p>
                 </div>
-        
+
                 <div class="row">
                     <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
                         <div class="member">
@@ -82,7 +87,7 @@
                             </div>
                         </div>
                     </div>
-        
+
                     <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
                         <div class="member">
                             <div class="member-img">
@@ -93,7 +98,7 @@
                             </div>
                         </div>
                     </div>
-        
+
                     <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
                         <div class="member">
                             <div class="member-img">
@@ -104,7 +109,7 @@
                             </div>
                         </div>
                     </div>
-        
+
                     <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
                         <div class="member">
                             <div class="member-img">
@@ -130,13 +135,17 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                         <div class="align-items-md-center">
-                            <img class="ms-auto" src="{{ asset('assets/img/image-tari.svg') }}" height="400" width="700">
+                            <img class="ms-auto" src="{{ asset('assets/img/image-tari.svg') }}" height="400"
+                                width="700">
                         </div>
                     </div>
 
-                    <div class="col-lg-6 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="col-lg-6 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in"
+                        data-aos-delay="200">
                         <div class="text-center" style="padding-top: 200px; margin-left: 200px;">
-                            <button class="btn btn-primary" style="width: 100%;" onclick="location.href = '{{ route('class', ['kategori' => $kategori]) }}'">Belajar Kursus</button>
+                            <button class="btn btn-primary" style="width: 100%;"
+                                onclick="location.href = '{{ route('class', ['kategori' => $kategori]) }}'">Belajar
+                                Kursus</button>
                         </div>
                     </div>
                 </div>
@@ -167,14 +176,16 @@
                                                     <img class="img-fluid" alt="100%x280" src="{{ $item->image }}">
                                                     <div class="card-body">
                                                         <h5 class="card-title">{{ $item->nama }}</h5>
-                                                        <p class="card-text">Penyewaan {{ $item->jangka_waktu_sewa }} hari</p>
+                                                        <p class="card-text">Penyewaan {{ $item->jangka_waktu_sewa }} hari
+                                                        </p>
                                                     </div>
                                                     <div class="card-footer">
-                                                        <p class="card-text">Rp. {{ number_format($item->harga, 0, ',', '.') }}</p>
+                                                        <p class="card-text">Rp.
+                                                            {{ number_format($item->harga, 0, ',', '.') }}</p>
                                                     </div>
                                                 </div>
                                             </a>
-                                        </div> 
+                                        </div>
                                     @endforeach
                                 </div>
                             </div>
@@ -199,16 +210,20 @@
                     <div class="col-lg-6 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                         <div class="d-flex align-items-md-center">
                             <p>
-                                Sanggar Tari Purnama ini memilki banyak peminat yang kebanyakan anak kecil dan remaja, 
-                                dengan seluruh jumlah 37 orang dengan prestasi-prestasi yang memukau, mengikuti beberapa perlombaan. 
-                                sanggar tari purnama ini cukup dikenal banyak masyarakat, dan mengundang minat masyarakat untuk mendaftarkan anak-anaknya yang lebih suka terhadap 
+                                Sanggar Tari Purnama ini memilki banyak peminat yang kebanyakan anak kecil dan remaja,
+                                dengan seluruh jumlah 37 orang dengan prestasi-prestasi yang memukau, mengikuti beberapa
+                                perlombaan.
+                                sanggar tari purnama ini cukup dikenal banyak masyarakat, dan mengundang minat masyarakat
+                                untuk mendaftarkan anak-anaknya yang lebih suka terhadap
                                 seni termasuk tari. Sehingga banyak murid dari sanggar yang dari luar kota bekasi.
                             </p>
                         </div>
                     </div>
 
-                    <div class="col-lg-6 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-                        <img class="ms-auto" src="{{ asset('assets/img/image-tari.svg') }}" height="400" width="700">
+                    <div class="col-lg-6 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in"
+                        data-aos-delay="200">
+                        <img class="ms-auto" src="{{ asset('assets/img/image-tari.svg') }}" height="400"
+                            width="700">
                     </div>
                 </div>
             </div>
@@ -224,21 +239,27 @@
 
                 <div class="row" data-aos="fade-up" data-aos-delay="100">
                     <div class="col-lg-6 ">
-                        <iframe class="mb-4 mb-lg-0" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=sanggar tari purnama bekasi&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
+                        <iframe class="mb-4 mb-lg-0"
+                            src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=sanggar tari purnama bekasi&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                            frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
                     </div>
 
                     <div class="col-lg-6">
-                        <form method="post" action="https://formspree.io/f/xaygbevy" role="form" class="php-email-form" id="my-form">
+                        <form method="post" action="https://formspree.io/f/xaygbevy" role="form"
+                            class="php-email-form" id="my-form">
                             <div class="row">
                                 <div class="col form-group">
-                                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                                    <input type="text" name="name" class="form-control" id="name"
+                                        placeholder="Your Name" required>
                                 </div>
                                 <div class="col form-group">
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                                    <input type="email" class="form-control" name="email" id="email"
+                                        placeholder="Your Email" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                                <input type="text" class="form-control" name="subject" id="subject"
+                                    placeholder="Subject" required>
                             </div>
                             <div class="form-group">
                                 <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
@@ -250,7 +271,7 @@
 
             </div>
         </section>
-        <!-- End Contact Section --> 
+        <!-- End Contact Section -->
     </main>
     <!-- End #main -->
 
@@ -264,7 +285,7 @@
                 </div>
                 <div class="modal-body">
                     <p>
-                        Hallo ,Yeayy 
+                        Hallo ,Yeayy
                         Sekarang kita punya fitur Pendaftaran khursus tari
                         lhoo dan kamu bisa memilih materi video tari jika
                         kamu melakukan pendaftaran dan memilih kategori
@@ -272,7 +293,8 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary ms-auto me-auto" onclick="location.href='{{ route('form-register-course') }}'">Isi Form</button>
+                    <button type="button" class="btn btn-primary ms-auto me-auto"
+                        onclick="location.href='{{ route('form-register-course') }}'">Isi Form</button>
                 </div>
             </div>
         </div>
@@ -280,51 +302,51 @@
 @endsection
 
 @section('scripts')
-<script>
-    var splide = new Splide('.splide', {
-        arrows :false,
-        type: 'loop',
-        perPage: 5,
-        rewind: true,
-        autoplay: "play"
-    });
-
-    splide.mount();
-
-    var form = document.getElementById("my-form");
-    
-    async function handleSubmit(event) {
-        event.preventDefault();
-        var status = document.getElementById("my-form-status");
-        var data = new FormData(event.target);
-        fetch(event.target.action, {
-            method: form.method,
-            body: data,
-            headers: {
-                'Accept': 'application/json'
-            }
-        }).then(response => {
-            if (response.ok) {
-                toastr.options.timeOut = 8000;
-                toastr.success('Thanks for your submission!');
-                form.reset()
-            } else {
-                response.json().then(data => {
-                    if (Object.hasOwn(data, 'errors')) {
-                        toastr.options.timeOut = 8000;
-                        toastr.error(data["errors"].map(error => error["message"]).join(", "));
-                    } else {
-                        toastr.options.timeOut = 8000;
-                        toastr.error("There was a problem submitting your form");
-                    }
-                })
-            }
-        }).catch(error => {
-            toastr.options.timeOut = 8000;
-            toastr.error("There was a problem submitting your form");
+    <script>
+        var splide = new Splide('.splide', {
+            arrows: false,
+            type: 'loop',
+            perPage: 5,
+            rewind: true,
+            autoplay: "play"
         });
-    }
-    
-    form.addEventListener("submit", handleSubmit)
-</script>
+
+        splide.mount();
+
+        var form = document.getElementById("my-form");
+
+        async function handleSubmit(event) {
+            event.preventDefault();
+            var status = document.getElementById("my-form-status");
+            var data = new FormData(event.target);
+            fetch(event.target.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    toastr.options.timeOut = 8000;
+                    toastr.success('Thanks for your submission!');
+                    form.reset()
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            toastr.options.timeOut = 8000;
+                            toastr.error(data["errors"].map(error => error["message"]).join(", "));
+                        } else {
+                            toastr.options.timeOut = 8000;
+                            toastr.error("There was a problem submitting your form");
+                        }
+                    })
+                }
+            }).catch(error => {
+                toastr.options.timeOut = 8000;
+                toastr.error("There was a problem submitting your form");
+            });
+        }
+
+        form.addEventListener("submit", handleSubmit)
+    </script>
 @endsection

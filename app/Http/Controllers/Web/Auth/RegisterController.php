@@ -57,8 +57,10 @@ class RegisterController extends Controller
                 ->where('id_user', Session::get('id'))
                 ->exists();
 
+            $schedule_course = DB::table('schedule_course')->get();
+
             if(!$rc){
-                return view('register_course.index', compact('display', 'display_kelas', 'display_daftar_kursus', 'kategori'));
+                return view('register_course.index', compact('display', 'display_kelas', 'display_daftar_kursus', 'kategori', 'schedule_course'));
             } else {
                 return view('register_course.waiting_verification', compact('display', 'display_kelas', 'display_daftar_kursus', 'kategori'));
             }

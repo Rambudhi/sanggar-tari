@@ -3,18 +3,18 @@
         <a href="index.html" class="app-brand-link">
             <span class="app-brand-logo demo me-1">
                 <span style="color:var(--bs-primary);">
-                    <img src="{{ asset('assets/img/purnama.png') }}" alt="" width="60" height="60">               
+                    <img src="{{ asset('assets/img/purnama.png') }}" alt="" width="60" height="60">
                 </span>
             </span>
-            </a>
+        </a>
 
-            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
             <i class="mdi menu-toggle-icon d-xl-block align-middle mdi-20px"></i>
         </a>
     </div>
-    
+
     <div class="menu-inner-shadow"></div>
-    
+
     <ul class="menu-inner py-1">
         <!-- Dashboards -->
         <li class="menu-item {{ Route::currentRouteName() == 'admin::dashboard' ? 'active' : '' }}">
@@ -33,7 +33,8 @@
                 <div data-i18n="penggunaAktif">Pengguna Aktif</div>
             </a>
         </li>
-        <li class="menu-item {{ Route::currentRouteName() == 'admin::register-course' || Route::currentRouteName() == 'admin::register-course-detail' ? 'active' : '' }}">
+        <li
+            class="menu-item {{ Route::currentRouteName() == 'admin::register-course' || Route::currentRouteName() == 'admin::register-course-detail' ? 'active' : '' }}">
             <a href="{{ route('admin::register-course') }}" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-account-outline"></i>
                 <div data-i18n="penggunaAktif">Pendaftaran Kursus</div>
@@ -66,7 +67,8 @@
         <li class="menu-header fw-medium mt-4">
             <span class="menu-header-text">Kelas</span>
         </li>
-        <li class="menu-item {{ Route::currentRouteName() == 'admin::class-material' || Route::currentRouteName() == 'admin::class-material-detail' ? 'active' : '' }}">
+        <li
+            class="menu-item {{ Route::currentRouteName() == 'admin::class-material' || Route::currentRouteName() == 'admin::class-material-detail' ? 'active' : '' }}">
             <a href="{{ route('admin::class-material') }}" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-file-document-multiple-outline"></i>
                 <div data-i18n="penggunaAktif">Materi</div>
@@ -75,7 +77,8 @@
         <li class="menu-header fw-medium mt-4">
             <span class="menu-header-text">Master</span>
         </li>
-        <li class="menu-item {{ Route::currentRouteName() == 'admin::custom-type' || Route::currentRouteName() == 'admin::custom-type-detail' ? 'active' : '' }}">
+        <li
+            class="menu-item {{ Route::currentRouteName() == 'admin::custom-type' || Route::currentRouteName() == 'admin::custom-type-detail' ? 'active' : '' }}">
             <a href="{{ route('admin::custom-type') }}" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-file-document-multiple-outline"></i>
                 <div data-i18n="penggunaAktif">Jenis Kustom</div>
@@ -85,6 +88,12 @@
             <a href="{{ route('admin::custom-size') }}" class="menu-link">
                 <i class="menu-icon tf-icons mdi mdi-file-document-multiple-outline"></i>
                 <div data-i18n="penggunaAktif">Ukuran</div>
+            </a>
+        </li>
+        <li class="menu-item {{ Route::currentRouteName() == 'admin::schedule-course-by-category' ? 'active' : '' }}">
+            <a href="{{ route('admin::schedule-course-by-category') }}" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-file-document-multiple-outline"></i>
+                <div data-i18n="jadwalKursus">Jadwal Kursus</div>
             </a>
         </li>
     </ul>

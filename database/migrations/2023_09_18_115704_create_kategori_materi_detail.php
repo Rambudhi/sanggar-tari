@@ -20,6 +20,8 @@ class CreateKategoriMateriDetail extends Migration
             $table->text('video');
             $table->text('desc');
             $table->integer('order_seq')->unique();
+            $table->text('image');
+            $table->string('deskripsi_image', 30);
         });
     }
 

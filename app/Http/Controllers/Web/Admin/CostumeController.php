@@ -406,8 +406,6 @@ class CostumeController extends Controller
 
             $rules = [
                 'status' => 'required|string',
-                'tgl_pengambilan' => 'required|string',
-                'tgl_pengembalian' => 'required|string',
             ];
     
             $validator = Validator::make($data, $rules);
@@ -440,8 +438,6 @@ class CostumeController extends Controller
 
                 $record_1 = [
                     'status' => $data['status'],
-                    'tgl_pengambilan' => $data['tgl_pengambilan'],
-                    'tgl_pengembalian' => $data['tgl_pengembalian'],
                 ];
 
                 $update = DB::table('trx_custome_rental')->where('id', $data['id_transaksi'])->update($record_1);
@@ -450,8 +446,6 @@ class CostumeController extends Controller
             if($data['status'] === 'DIBATALKAN') {
                 $record_1 = [
                     'status' => $data['status'],
-                    'tgl_pengambilan' => $data['tgl_pengambilan'],
-                    'tgl_pengembalian' => $data['tgl_pengembalian'],
                 ];
 
                 $update = DB::table('trx_custome_rental')->where('id', $data['id_transaksi'])->update($record_1);
@@ -501,7 +495,6 @@ class CostumeController extends Controller
 
             $rules = [
                 'status' => 'required|string',
-                'tgl_disetujui' => 'required|string',
             ];
     
             $validator = Validator::make($data, $rules);
@@ -534,7 +527,7 @@ class CostumeController extends Controller
 
                 $record_1 = [
                     'status' => $data['status'],
-                    'tgl_disetujui' => $data['tgl_disetujui'],
+                    'tgl_disetujui' => date("Y-m-d H:i:s"),
                 ];
 
                 $update = DB::table('trx_custome_rental')->where('id', $data['id_transaksi'])->update($record_1);
